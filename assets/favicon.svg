@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E9E44"/>
+      <stop offset="100%" stop-color="#1F5733"/>
+    </linearGradient>
+    <linearGradient id="seedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5A93C"/>
+      <stop offset="100%" stop-color="#C68018"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#F7F9F2" stroke="#2E9E44" stroke-width="2.5"/>
+  <!-- Sprout / Leaf Motif -->
+  <path d="M32 46 C32 34 22 26 18 16 C28 16 34 24 33 34 Z" fill="url(#leafGrad)"/>
+  <path d="M32 46 C32 30 44 22 48 14 C40 16 33 26 33 34 Z" fill="url(#leafGrad)" opacity="0.85"/>
+  <!-- Golden Grain / Seed -->
+  <path d="M32 48 C28 42 27 34 32 26 C37 34 36 42 32 48 Z" fill="url(#seedGrad)"/>
+  <!-- Base Soil Curve -->
+  <path d="M22 50 C26 48 38 48 42 50 C38 52 26 52 22 50 Z" fill="#1F5733"/>
+</svg>

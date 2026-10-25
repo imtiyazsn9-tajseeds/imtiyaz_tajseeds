@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Farmer Field Demonstration & King-7820 Trials",
+    "category": "farm",
+    "categoryLabel": "Farm & Trials",
+    "desc": "Farmers in rural maize demonstration trials showcasing bumper harvest cobs with Taj Seeds King-7820 hybrid maize. Banner: 'ताज मक्का मिट्टी में शेर, बल्वाई में सवा शेर!!'",
+    "image": "assets/gallery/field-demo-king-7820.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Medchal Processing Plant & Factory Floor",
+    "category": "plant",
+    "categoryLabel": "Processing Plant",
+    "desc": "Our high-capacity seed conditioning and processing floor at Medchal, Hyderabad, equipped with mechanical grading lines, grain elevators, and inventory staging.",
+    "image": "assets/gallery/factory-main.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "Seed Cleaning & Gravity Separation Machinery",
+    "category": "plant",
+    "categoryLabel": "Processing Plant",
+    "desc": "Industrial-grade AgriSep seed cleaner and air-screen sorting machinery ensuring 99.8% mechanical purity and removal of immature kernels.",
+    "image": "assets/gallery/processing-machinery.jpeg"
+  },
+  {
+    "id": 4,
+    "title": "Medchal Central Warehouse & Logistics Hub",
+    "category": "warehouse",
+    "categoryLabel": "Warehouse",
+    "desc": "Exterior view of our state-of-the-art climate-monitored central seed warehouse in Medchal, Hyderabad with active loading docks and logistics fleet.",
+    "image": "assets/gallery/warehouse-exterior.jpeg"
+  },
+  {
+    "id": 5,
+    "title": "Warehouse Dispatch Platform & Loading Bays",
+    "category": "warehouse",
+    "categoryLabel": "Warehouse",
+    "desc": "Automated warehouse dispatch bay facilitating fast turnarounds for full-truckload (FTL) seed consignments reaching dealers across India.",
+    "image": "assets/gallery/warehouse-dispatch.jpeg"
+  },
+  {
+    "id": 6,
+    "title": "Corporate Headquarters Signboard",
+    "category": "warehouse",
+    "categoryLabel": "Warehouse",
+    "desc": "Official Taj Seeds Agri Sciences registered facility board at Plot 57 & 58, Kurish Homes, Uma Nagar, Medchal, Telangana (Pin 501401).",
+    "image": "assets/gallery/facility-signboard.jpeg"
+  },
+  {
+    "id": 7,
+    "title": "Certified Maize Varieties Demonstration",
+    "category": "farm",
+    "categoryLabel": "Farm & Trials",
+    "desc": "High-yield hybrid maize demonstration records including Taj 9055 Gold, Taj 7244, Taj 3452, Taj 7820, and Heera 35.",
+    "image": "assets/gallery/farm-field-brochure.jpeg"
+  },
+  {
+    "id": 8,
+    "title": "Original Power Seal & 3D Hologram Security",
+    "category": "packaging",
+    "categoryLabel": "Packaging & Security",
+    "desc": "Official anti-counterfeiting security packaging featuring Original Power Seal, tamper-evident 3D Hologram, and authentic farmer mark to protect farmers from duplicates.",
+    "image": "assets/products/KING-7244-security.png"
+  },
+  {
+    "id": 9,
+    "title": "Official Taj Seeds Brand Emblem",
+    "category": "packaging",
+    "categoryLabel": "Packaging & Brand",
+    "desc": "The authentic circular emblem of Taj Seeds featuring the sprout of agricultural trust and our defining motto: 'Every Step with Farmer'.",
+    "image": "assets/gallery/brand-emblem.jpeg"
+  }
+]

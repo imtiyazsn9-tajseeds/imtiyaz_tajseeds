@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" width="800" height="550">
+  <defs>
+    <linearGradient id="packBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34495E"/>
+      <stop offset="100%" stop-color="#1A252F"/>
+    </linearGradient>
+    <linearGradient id="metalBelt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7F8C8D"/>
+      <stop offset="50%" stop-color="#BDC3C7"/>
+      <stop offset="100%" stop-color="#566573"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="550" fill="url(#packBg)"/>
+  
+  <!-- Factory Background Elements -->
+  <line x1="0" y1="120" x2="800" y2="120" stroke="#4A6572" stroke-width="4"/>
+  <rect x="60" y="80" width="100" height="40" fill="#2C3E50" stroke="#7F8C8D"/>
+  <rect x="240" y="70" width="140" height="50" fill="#2C3E50" stroke="#7F8C8D"/>
+  <rect x="460" y="80" width="90" height="40" fill="#2C3E50" stroke="#7F8C8D"/>
+  <rect x="620" y="75" width="120" height="45" fill="#2C3E50" stroke="#7F8C8D"/>
+
+  <!-- Clean Epoxy Floor -->
+  <rect x="0" y="420" width="800" height="130" fill="#212F3D"/>
+
+  <!-- Main Bagging & Sealing Machine Overhead Frame -->
+  <rect x="250" y="120" width="300" height="160" rx="6" fill="#2E9E44" stroke="#1F5733" stroke-width="4"/>
+  <!-- Filling Nozzle / Hopper Chute -->
+  <polygon points="360,280 440,280 420,330 380,330" fill="#BDC3C7" stroke="#7F8C8D" stroke-width="2"/>
+  <rect x="385" y="330" width="30" height="25" fill="#E74C3C"/>
+
+  <!-- Machine Display Screen & Buttons -->
+  <rect x="280" y="150" width="140" height="80" rx="4" fill="#000000" stroke="#52BE80" stroke-width="2"/>
+  <text x="295" y="180" font-family="monospace" font-size="12" fill="#00FF66">AUTO-WEIGH: OK</text>
+  <text x="295" y="200" font-family="monospace" font-size="15" font-weight="bold" fill="#00FF66">5.000 KG</text>
+  <text x="295" y="220" font-family="monospace" font-size="11" fill="#AED6F1">SEAL TEMP: 185°C</text>
+
+  <!-- Status Stack Light (Green/Yellow/Red tower) -->
+  <rect x="520" y="60" width="16" height="60" rx="4" fill="#1C2833"/>
+  <circle cx="528" cy="72" r="6" fill="#2ECC71"/>
+  <circle cx="528" cy="90" r="6" fill="#F39C12" opacity="0.3"/>
+  <circle cx="528" cy="108" r="6" fill="#E74C3C" opacity="0.3"/>
+
+  <!-- Conveyor System -->
+  <rect x="40" y="370" width="720" height="50" rx="4" fill="url(#metalBelt)" stroke="#2C3E50" stroke-width="3"/>
+  <!-- Conveyor Rollers -->
+  <g fill="#34495E">
+    <circle cx="70" cy="395" r="15"/>
+    <circle cx="160" cy="395" r="15"/>
+    <circle cx="250" cy="395" r="15"/>
+    <circle cx="340" cy="395" r="15"/>
+    <circle cx="430" cy="395" r="15"/>
+    <circle cx="520" cy="395" r="15"/>
+    <circle cx="610" cy="395" r="15"/>
+    <circle cx="700" cy="395" r="15"/>
+  </g>
+  <!-- Conveyor Support Legs -->
+  <rect x="100" y="420" width="16" height="80" fill="#566573"/>
+  <rect x="300" y="420" width="16" height="80" fill="#566573"/>
+  <rect x="500" y="420" width="16" height="80" fill="#566573"/>
+  <rect x="680" y="420" width="16" height="80" fill="#566573"/>
+
+  <!-- Seed Bags on Conveyor Belt in Transit -->
+  <!-- Bag 1 (Entering) -->
+  <rect x="130" y="270" width="70" height="100" rx="4" fill="#2E9E44"/>
+  <rect x="140" y="290" width="50" height="40" rx="2" fill="#FFFFFF"/>
+  <text x="146" y="310" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#D7262E">TAJ</text>
+  <text x="146" y="322" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#1F4E9C">SEEDS</text>
+
+  <!-- Bag 2 (Under Filling Head) -->
+  <rect x="365" y="260" width="70" height="110" rx="4" fill="#1F5733"/>
+  <rect x="375" y="285" width="50" height="45" rx="2" fill="#FFFFFF"/>
+  <text x="381" y="305" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#D7262E">TAJ</text>
+  <text x="381" y="318" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#1F4E9C">SEEDS</text>
+  <!-- Stitching arm sealing the bag -->
+  <path d="M400 230 L400 260" stroke="#F1C40F" stroke-width="4"/>
+
+  <!-- Bag 3 (Sealed & Finished, exiting) -->
+  <rect x="550" y="270" width="70" height="100" rx="4" fill="#D7262E"/>
+  <rect x="560" y="290" width="50" height="40" rx="2" fill="#FFFFFF"/>
+  <text x="566" y="310" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#D7262E">TAJ</text>
+  <text x="566" y="322" font-family="'Playfair Display', serif" font-size="10" font-weight="bold" fill="#1F4E9C">SEEDS</text>
+  <circle cx="585" cy="350" r="10" fill="#27AE60"/>
+  <path d="M580 350 L584 354 L591 346" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+
+  <!-- Operator Checking Finished Bags on Right -->
+  <circle cx="680" cy="270" r="14" fill="#F5CBA7"/>
+  <polygon points="665,262 695,262 680,250" fill="#F1C40F"/>
+  <rect x="670" y="284" width="20" height="50" rx="4" fill="#2E9E44"/>
+  <rect x="670" y="334" width="9" height="40" fill="#2C3E50"/>
+  <rect x="681" y="334" width="9" height="40" fill="#2C3E50"/>
+
+  <!-- Badge -->
+  <rect x="30" y="30" width="270" height="48" rx="24" fill="#1F5733" opacity="0.95"/>
+  <circle cx="54" cy="54" r="14" fill="#2E9E44"/>
+  <path d="M48 54 L52 58 L60 50" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="78" y="50" font-family="'Poppins', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Automated Packaging</text>
+  <text x="78" y="65" font-family="'Poppins', sans-serif" font-size="10" fill="#E2F0D9">High-Speed Sealing & Batch Coding</text>
+</svg>

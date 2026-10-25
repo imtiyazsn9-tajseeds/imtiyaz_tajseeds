@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" width="800" height="550">
+  <defs>
+    <linearGradient id="farmSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2980B9"/>
+      <stop offset="50%" stop-color="#85C1E9"/>
+      <stop offset="85%" stop-color="#F9E79F"/>
+      <stop offset="100%" stop-color="#FAD7A0"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF5CC"/>
+      <stop offset="50%" stop-color="#F39C12" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F39C12" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="550" fill="url(#farmSky)"/>
+  
+  <!-- Sun -->
+  <circle cx="580" cy="180" r="90" fill="url(#sun)"/>
+  <circle cx="580" cy="180" r="35" fill="#FFFBEA"/>
+
+  <!-- Mountains -->
+  <path d="M0 260 Q150 200 320 240 Q500 180 800 250 L800 350 L0 350 Z" fill="#2ECC71" opacity="0.4"/>
+  <path d="M0 280 Q200 230 440 270 Q660 220 800 280 L800 370 L0 370 Z" fill="#27AE60" opacity="0.6"/>
+
+  <!-- Field Ground -->
+  <rect x="0" y="310" width="800" height="240" fill="#145A32"/>
+
+  <!-- Perspective crop rows -->
+  <g stroke="#0E3A20" stroke-width="3" opacity="0.5">
+    <line x1="400" y1="310" x2="-100" y2="550"/>
+    <line x1="400" y1="310" x2="100" y2="550"/>
+    <line x1="400" y1="310" x2="300" y2="550"/>
+    <line x1="400" y1="310" x2="500" y2="550"/>
+    <line x1="400" y1="310" x2="700" y2="550"/>
+    <line x1="400" y1="310" x2="900" y2="550"/>
+  </g>
+
+  <!-- Happy Farmer Standing in Maize Field -->
+  <g transform="translate(380, 260)">
+    <!-- Body -->
+    <rect x="-14" y="55" width="28" height="50" rx="4" fill="#1F4E9C"/> <!-- Kurta / Shirt -->
+    <rect x="-12" y="105" width="10" height="40" fill="#FFFFFF"/> <!-- Dhoti/Pants -->
+    <rect x="2" y="105" width="10" height="40" fill="#FFFFFF"/>
+    <!-- Head & Gamcha / Turban -->
+    <circle cx="0" cy="38" r="14" fill="#D98880"/>
+    <ellipse cx="0" cy="28" rx="16" ry="8" fill="#D7262E"/> <!-- Red Gamcha / Turban -->
+    <!-- Arms raised showing lush cob -->
+    <path d="M-14 65 L-30 45 L-32 30" stroke="#D98880" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M14 65 L32 45 L35 30" stroke="#D98880" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <rect x="30" y="22" width="12" height="24" rx="4" fill="#F1C40F"/> <!-- Held Corn Cob -->
+  </g>
+
+  <!-- Foreground Lush Green Maize Foliage -->
+  <!-- Left Side -->
+  <g transform="translate(20, 240)">
+    <path d="M80 310 Q85 160 90 70" stroke="#1E8449" stroke-width="12" fill="none"/>
+    <path d="M85 240 Q30 190 -30 220 Q30 160 85 200" fill="#2ECC71"/>
+    <path d="M87 180 Q20 140 -20 170 Q30 110 88 150" fill="#27AE60"/>
+    <path d="M88 230 Q140 180 200 210 Q140 150 88 190" fill="#229954"/>
+    <path d="M89 160 Q150 120 190 140 Q140 90 89 130" fill="#2ECC71"/>
+    <!-- Cobs -->
+    <path d="M87 190 Q110 170 115 140 Q105 140 85 165 Z" fill="#F39C12"/>
+    <path d="M90 70 Q80 40 70 25 M90 70 Q90 35 90 20 M90 70 Q100 40 110 25" stroke="#F1C40F" stroke-width="2.5" fill="none"/>
+  </g>
+
+  <!-- Right Side -->
+  <g transform="translate(620, 240)">
+    <path d="M80 310 Q75 160 70 70" stroke="#1E8449" stroke-width="12" fill="none"/>
+    <path d="M75 240 Q130 190 190 220 Q130 160 75 200" fill="#2ECC71"/>
+    <path d="M73 180 Q140 140 180 170 Q130 110 72 150" fill="#27AE60"/>
+    <path d="M72 230 Q20 180 -40 210 Q20 150 72 190" fill="#229954"/>
+    <path d="M71 160 Q10 120 -30 140 Q20 90 71 130" fill="#2ECC71"/>
+    <path d="M73 190 Q50 170 45 140 Q55 140 75 165 Z" fill="#F39C12"/>
+    <path d="M70 70 Q60 40 50 25 M70 70 Q70 35 70 20 M70 70 Q80 40 90 25" stroke="#F1C40F" stroke-width="2.5" fill="none"/>
+  </g>
+
+  <!-- Badge -->
+  <rect x="30" y="30" width="260" height="48" rx="24" fill="#1F5733" opacity="0.95"/>
+  <circle cx="54" cy="54" r="14" fill="#2E9E44"/>
+  <path d="M48 54 L52 58 L60 50" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="78" y="50" font-family="'Poppins', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Field Demonstration</text>
+  <text x="78" y="65" font-family="'Poppins', sans-serif" font-size="10" fill="#E2F0D9">High-Yield Hybrid Trials</text>
+</svg>

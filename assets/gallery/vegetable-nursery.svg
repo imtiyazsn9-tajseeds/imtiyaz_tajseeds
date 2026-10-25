@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" width="800" height="550">
+  <defs>
+    <linearGradient id="polyBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8F8F5"/>
+      <stop offset="60%" stop-color="#D4EFDF"/>
+      <stop offset="100%" stop-color="#A9DFBF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="550" fill="url(#polyBg)"/>
+
+  <!-- Greenhouse Arch Structure -->
+  <path d="M40 450 Q400 60 760 450" fill="none" stroke="#27AE60" stroke-width="8" opacity="0.6"/>
+  <path d="M120 450 Q400 120 680 450" fill="none" stroke="#2ECC71" stroke-width="6" opacity="0.5"/>
+  <line x1="400" y1="95" x2="400" y2="450" stroke="#27AE60" stroke-width="4" opacity="0.5"/>
+  <!-- Drip irrigation hanging lines -->
+  <line x1="0" y1="200" x2="800" y2="200" stroke="#34495E" stroke-width="2"/>
+  <line x1="200" y1="200" x2="200" y2="350" stroke="#3498DB" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="400" y1="200" x2="400" y2="350" stroke="#3498DB" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="600" y1="200" x2="600" y2="350" stroke="#3498DB" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <!-- Soil Raised Beds -->
+  <rect x="0" y="380" width="800" height="170" fill="#5D4037"/>
+
+  <!-- Vegetable Plants: Chili / Tomato / Okra Hybrid Nursery -->
+  <!-- Left Side: Ripe Hybrid Tomatoes -->
+  <g transform="translate(100, 260)">
+    <path d="M80 180 Q85 80 90 20" stroke="#2E7D32" stroke-width="8" fill="none"/>
+    <circle cx="60" cy="90" r="18" fill="#D32F2F"/>
+    <circle cx="110" cy="110" r="20" fill="#E53935"/>
+    <circle cx="75" cy="140" r="16" fill="#F44336"/>
+    <!-- Tomato calyx -->
+    <path d="M60 72 L55 65 M60 72 L65 65 M60 72 L60 62" stroke="#2E7D32" stroke-width="3"/>
+    <path d="M110 90 L105 83 M110 90 L115 83 M110 90 L110 80" stroke="#2E7D32" stroke-width="3"/>
+    <!-- Leaves -->
+    <ellipse cx="40" cy="60" rx="18" ry="8" fill="#43A047" transform="rotate(-30 40 60)"/>
+    <ellipse cx="130" cy="70" rx="20" ry="9" fill="#43A047" transform="rotate(25 130 70)"/>
+  </g>
+
+  <!-- Center: Green & Red Hot Peppers / Chilis -->
+  <g transform="translate(330, 250)">
+    <path d="M70 190 Q72 80 75 10" stroke="#2E7D32" stroke-width="8" fill="none"/>
+    <!-- Hanging Chilis -->
+    <path d="M50 70 Q40 110 48 140 Q55 110 55 70 Z" fill="#D32F2F"/>
+    <path d="M90 80 Q105 120 95 150 Q85 120 85 80 Z" fill="#2E7D32"/>
+    <path d="M70 110 Q80 145 72 170 Q65 145 68 110 Z" fill="#E53935"/>
+    <!-- Leaves -->
+    <ellipse cx="30" cy="50" rx="22" ry="8" fill="#43A047" transform="rotate(-35 30 50)"/>
+    <ellipse cx="110" cy="60" rx="22" ry="8" fill="#43A047" transform="rotate(35 110 60)"/>
+  </g>
+
+  <!-- Right: Okra / Bhindi Pods & Seedlings -->
+  <g transform="translate(560, 240)">
+    <path d="M80 200 Q78 90 75 10" stroke="#2E7D32" stroke-width="9" fill="none"/>
+    <polygon points="65,90 75,50 85,90 80,140 70,140" fill="#43A047" stroke="#2E7D32"/>
+    <polygon points="105,110 112,70 120,110 116,155 108,155" fill="#388E3C" stroke="#1B5E20"/>
+    <ellipse cx="45" cy="80" rx="25" ry="12" fill="#66BB6A" transform="rotate(-20 45 80)"/>
+    <ellipse cx="125" cy="70" rx="24" ry="12" fill="#66BB6A" transform="rotate(20 125 70)"/>
+  </g>
+
+  <!-- Badge -->
+  <rect x="30" y="30" width="280" height="48" rx="24" fill="#1F5733" opacity="0.95"/>
+  <circle cx="54" cy="54" r="14" fill="#2E9E44"/>
+  <path d="M48 54 L52 58 L60 50" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="78" y="50" font-family="'Poppins', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Vegetable Research Nursery</text>
+  <text x="78" y="65" font-family="'Poppins', sans-serif" font-size="10" fill="#E2F0D9">High-Yielding Tomato, Chili & Okra</text>
+</svg>

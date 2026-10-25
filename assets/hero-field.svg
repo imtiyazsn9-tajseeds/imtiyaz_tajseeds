@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <defs>
+    <!-- Sky Sunrise / Golden Hour Gradient -->
+    <linearGradient id="heroSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1B4F72"/>
+      <stop offset="35%" stop-color="#2E86C1"/>
+      <stop offset="65%" stop-color="#AED6F1"/>
+      <stop offset="85%" stop-color="#FAD7A0"/>
+      <stop offset="100%" stop-color="#F9E79F"/>
+    </linearGradient>
+
+    <!-- Sun Glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF275" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#F39C12" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F39C12" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="hillFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#58D68D"/>
+      <stop offset="100%" stop-color="#1E8449"/>
+    </linearGradient>
+
+    <linearGradient id="hillMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#28B463"/>
+      <stop offset="100%" stop-color="#196F3D"/>
+    </linearGradient>
+
+    <linearGradient id="fieldFloor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#196F3D"/>
+      <stop offset="60%" stop-color="#145A32"/>
+      <stop offset="100%" stop-color="#0E3A20"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1600" height="1000" fill="url(#heroSky)"/>
+
+  <!-- Morning Golden Sun -->
+  <circle cx="1050" cy="380" r="140" fill="url(#sunGlow)"/>
+  <circle cx="1050" cy="380" r="55" fill="#FFFBEA"/>
+
+  <!-- Distant Mountain Ridges & Forest Horizon -->
+  <path d="M0 450 Q300 380 650 430 Q1050 360 1600 440 L1600 600 L0 600 Z" fill="url(#hillFar)" opacity="0.6"/>
+  <path d="M0 490 Q400 430 850 470 Q1300 420 1600 490 L1600 680 L0 680 Z" fill="url(#hillMid)" opacity="0.8"/>
+
+  <!-- Field Floor -->
+  <rect x="0" y="520" width="1600" height="480" fill="url(#fieldFloor)"/>
+
+  <!-- Rows of Agricultural Maize Field (Perspective Rows) -->
+  <!-- Perspective guide lines -->
+  <g stroke="#145A32" stroke-width="2" opacity="0.4">
+    <line x1="800" y1="520" x2="-200" y2="1000"/>
+    <line x1="800" y1="520" x2="200" y2="1000"/>
+    <line x1="800" y1="520" x2="600" y2="1000"/>
+    <line x1="800" y1="520" x2="1000" y2="1000"/>
+    <line x1="800" y1="520" x2="1400" y2="1000"/>
+    <line x1="800" y1="520" x2="1800" y2="1000"/>
+  </g>
+
+  <!-- Midground Maize Canopy -->
+  <g fill="#27AE60" opacity="0.75">
+    <!-- Repetitive foliage canopy -->
+    <path d="M0 580 Q200 540 400 570 T800 560 T1200 570 T1600 550 L1600 660 L0 660 Z"/>
+    <path d="M0 620 Q250 580 500 610 T1000 600 T1500 610 T1600 590 L1600 720 L0 720 Z" fill="#229954"/>
+  </g>
+
+  <!-- Foreground Detailed Maize Plants -->
+  <!-- Left Side Plants Cluster -->
+  <g id="maizeClusterLeft" transform="translate(-40, 480)">
+    <!-- Stalk 1 -->
+    <path d="M120 520 Q125 300 135 150" stroke="#239B56" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <!-- Leaves left -->
+    <path d="M130 400 Q80 340 0 380 Q70 300 130 350" fill="#2ECC71"/>
+    <path d="M132 300 Q60 250 -30 300 Q60 200 134 260" fill="#27AE60"/>
+    <path d="M135 220 Q70 170 10 200 Q70 130 135 190" fill="#2ECC71"/>
+    <!-- Leaves right -->
+    <path d="M130 420 Q190 350 280 400 Q200 320 130 380" fill="#229954"/>
+    <path d="M133 330 Q220 260 310 290 Q220 220 135 290" fill="#2ECC71"/>
+    <path d="M135 240 Q210 180 270 200 Q200 140 135 210" fill="#27AE60"/>
+    <!-- Golden Corn Cob on plant -->
+    <path d="M133 310 Q165 290 175 250 Q160 250 130 280 Z" fill="#F1C40F"/>
+    <path d="M130 305 Q145 295 155 260" stroke="#D68910" stroke-width="2" fill="none"/>
+    <!-- Tassel at top -->
+    <path d="M135 150 Q120 110 110 90 M135 150 Q135 105 135 85 M135 150 Q150 110 160 90" stroke="#F4D03F" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Left Center Stalks -->
+  <g transform="translate(240, 520)">
+    <path d="M100 480 Q110 280 120 140" stroke="#1E8449" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <path d="M105 380 Q50 320 -20 350 Q45 280 110 340" fill="#2ECC71"/>
+    <path d="M112 300 Q40 240 -10 270 Q45 200 115 260" fill="#28B463"/>
+    <path d="M108 400 Q170 330 250 370 Q180 300 112 360" fill="#229954"/>
+    <path d="M115 320 Q190 260 260 280 Q190 220 118 280" fill="#2ECC71"/>
+    <!-- Cob -->
+    <path d="M110 320 Q145 300 155 260 Q138 260 112 290 Z" fill="#F39C12"/>
+    <!-- Tassel -->
+    <path d="M120 140 Q105 100 95 80 M120 140 Q120 95 120 75 M120 140 Q135 100 145 80" stroke="#F4D03F" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Right Center Stalks -->
+  <g transform="translate(1120, 520)">
+    <path d="M100 480 Q90 280 80 140" stroke="#1E8449" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <path d="M95 380 Q150 320 220 350 Q155 280 90 340" fill="#2ECC71"/>
+    <path d="M88 300 Q160 240 210 270 Q155 200 85 260" fill="#28B463"/>
+    <path d="M92 400 Q30 330 -50 370 Q20 300 88 360" fill="#229954"/>
+    <path d="M85 320 Q10 260 -60 280 Q10 220 82 280" fill="#2ECC71"/>
+    <path d="M90 320 Q55 300 45 260 Q62 260 88 290 Z" fill="#F39C12"/>
+    <path d="M80 140 Q65 100 55 80 M80 140 Q80 95 80 75 M80 140 Q95 100 105 80" stroke="#F4D03F" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Far Right Foreground Stalks -->
+  <g transform="translate(1380, 480)">
+    <path d="M120 520 Q115 300 105 150" stroke="#239B56" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <path d="M110 400 Q160 340 240 380 Q170 300 110 350" fill="#2ECC71"/>
+    <path d="M108 300 Q180 250 270 300 Q180 200 106 260" fill="#27AE60"/>
+    <path d="M105 220 Q170 170 230 200 Q170 130 105 190" fill="#2ECC71"/>
+    <path d="M110 420 Q50 350 -40 400 Q40 320 110 380" fill="#229954"/>
+    <path d="M107 330 Q20 260 -70 290 Q20 220 105 290" fill="#2ECC71"/>
+    <!-- Cob -->
+    <path d="M107 310 Q75 290 65 250 Q80 250 110 280 Z" fill="#F1C40F"/>
+    <path d="M105 150 Q90 110 80 90 M105 150 Q105 105 105 85 M105 150 Q120 110 130 90" stroke="#F4D03F" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Ambient Light Rays radiating from Sun -->
+  <g opacity="0.12" fill="#FFFFFF">
+    <polygon points="1050,380 0,600 0,720"/>
+    <polygon points="1050,380 300,1000 500,1000"/>
+    <polygon points="1050,380 900,1000 1150,1000"/>
+    <polygon points="1050,380 1450,1000 1600,900"/>
+  </g>
+</svg>

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" width="800" height="550">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F7F9F2"/>
+      <stop offset="100%" stop-color="#E5ECD8"/>
+    </linearGradient>
+    <linearGradient id="bagGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1F5733"/>
+      <stop offset="60%" stop-color="#2E9E44"/>
+      <stop offset="100%" stop-color="#1B4D2C"/>
+    </linearGradient>
+    <linearGradient id="bagRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B01B22"/>
+      <stop offset="50%" stop-color="#D7262E"/>
+      <stop offset="100%" stop-color="#96151B"/>
+    </linearGradient>
+    <linearGradient id="bagBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#14366B"/>
+      <stop offset="50%" stop-color="#1F4E9C"/>
+      <stop offset="100%" stop-color="#0E274F"/>
+    </linearGradient>
+    <filter id="bagShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="15" stdDeviation="15" flood-color="#1F5733" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background Studio Setting -->
+  <rect width="800" height="550" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle leaf patterns in background -->
+  <path d="M50 120 C100 80 180 140 160 220 C110 200 70 180 50 120 Z" fill="#2E9E44" opacity="0.08"/>
+  <path d="M720 180 C680 120 600 130 620 220 C670 230 710 210 720 180 Z" fill="#2E9E44" opacity="0.08"/>
+
+  <!-- Wooden/Clean Pedestal Base -->
+  <ellipse cx="400" cy="460" rx="340" ry="50" fill="#D5DEC7"/>
+  <ellipse cx="400" cy="450" rx="320" ry="40" fill="#E2EAD5"/>
+
+  <!-- BAG 1 (Left - Sorghum Hybrid Seeds, Blue Theme) -->
+  <g transform="translate(140, 110) rotate(-6 100 200)" filter="url(#bagShadow)">
+    <!-- Bag Shape -->
+    <path d="M30 40 Q25 15 50 15 L150 15 Q175 15 170 40 L185 310 Q180 340 150 340 L50 340 Q20 340 15 310 Z" fill="url(#bagBlue)"/>
+    <!-- Stitching top line -->
+    <line x1="30" y1="25" x2="170" y2="25" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="6 4"/>
+    
+    <!-- Bag Label Header -->
+    <rect x="35" y="45" width="130" height="40" rx="4" fill="#FFFFFF"/>
+    <text x="50" y="70" font-family="'Playfair Display', serif" font-size="16" font-weight="900" fill="#D7262E">TAJ</text>
+    <text x="88" y="70" font-family="'Playfair Display', serif" font-size="16" font-weight="900" fill="#1F4E9C">SEEDS</text>
+    
+    <!-- Product Name -->
+    <rect x="30" y="105" width="140" height="30" fill="#F4D03F"/>
+    <text x="36" y="125" font-family="'Poppins', sans-serif" font-size="13" font-weight="bold" fill="#000000">TAJ CHARI PLUS</text>
+    <text x="50" y="150" font-family="'Poppins', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">HYBRID SORGHUM</text>
+
+    <!-- Crop Illustration Silhouette -->
+    <circle cx="100" cy="205" r="38" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Sorghum grains icon -->
+    <ellipse cx="100" cy="195" rx="14" ry="24" fill="#E67E22"/>
+    <ellipse cx="90" cy="215" rx="8" ry="14" fill="#D35400"/>
+    <ellipse cx="110" cy="215" rx="8" ry="14" fill="#D35400"/>
+    
+    <!-- Specs Strip -->
+    <rect x="35" y="260" width="130" height="50" rx="3" fill="#0E274F" opacity="0.9"/>
+    <text x="45" y="280" font-family="'Poppins', sans-serif" font-size="9" fill="#AED6F1">Net Weight: 5.0 kg</text>
+    <text x="45" y="295" font-family="'Poppins', sans-serif" font-size="9" fill="#00FF66">Germination: Min 90%</text>
+  </g>
+
+  <!-- BAG 2 (Center Foreground - Taj 9555 Maize Hybrid, Green & Gold Theme) -->
+  <g transform="translate(300, 70)" filter="url(#bagShadow)">
+    <!-- Main Bag Body -->
+    <path d="M30 40 Q25 10 50 10 L170 10 Q195 10 190 40 L205 370 Q200 400 160 400 L60 400 Q20 400 15 370 Z" fill="url(#bagGreen)"/>
+    <!-- Top Stitching -->
+    <line x1="30" y1="20" x2="190" y2="20" stroke="#F1C40F" stroke-width="4" stroke-dasharray="8 5"/>
+
+    <!-- Premium Shield / Seal at Top -->
+    <rect x="40" y="40" width="140" height="48" rx="6" fill="#FFFFFF"/>
+    <text x="52" y="70" font-family="'Playfair Display', serif" font-size="20" font-weight="900" fill="#D7262E">TAJ</text>
+    <text x="100" y="70" font-family="'Playfair Display', serif" font-size="20" font-weight="900" fill="#1F4E9C">SEEDS</text>
+    <text x="48" y="82" font-family="'Poppins', sans-serif" font-size="8" font-weight="bold" fill="#1F5733" letter-spacing="1">AGRI SCIENCES</text>
+
+    <!-- Hybrid Gold Banner -->
+    <rect x="25" y="105" width="170" height="40" rx="4" fill="#F39C12"/>
+    <text x="40" y="130" font-family="'Playfair Display', serif" font-size="18" font-weight="900" fill="#1A252F">TAJ 9555 HYBRID</text>
+    <text x="65" y="142" font-family="'Poppins', sans-serif" font-size="9" font-weight="700" fill="#FFFFFF" letter-spacing="1">SUPER MAIZE</text>
+
+    <!-- Golden Cob Centerpiece -->
+    <circle cx="110" cy="225" r="52" fill="#FFFFFF"/>
+    <!-- Maize Cob Graphic -->
+    <path d="M100 190 C90 190 85 240 100 260 C115 260 125 240 120 190 Z" fill="#F1C40F"/>
+    <line x1="95" y1="205" x2="118" y2="205" stroke="#D68910" stroke-width="2"/>
+    <line x1="93" y1="220" x2="120" y2="220" stroke="#D68910" stroke-width="2"/>
+    <line x1="96" y1="235" x2="117" y2="235" stroke="#D68910" stroke-width="2"/>
+    <!-- Husk leaves -->
+    <path d="M85 245 C75 220 85 195 95 185" fill="none" stroke="#27AE60" stroke-width="5" stroke-linecap="round"/>
+    <path d="M125 245 C135 220 125 195 118 185" fill="none" stroke="#27AE60" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Certified Seal Badge -->
+    <circle cx="165" cy="180" r="22" fill="#D7262E" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="150" y="180" font-family="sans-serif" font-size="8" font-weight="bold" fill="#FFFFFF">100%</text>
+    <text x="148" y="190" font-family="sans-serif" font-size="6.5" font-weight="bold" fill="#F9E79F">CERTIFIED</text>
+
+    <!-- Tagline on Bag -->
+    <text x="45" y="305" font-family="'Playfair Display', serif" font-style="italic" font-size="12" fill="#E8F8F5">"Every Step with Farmer"</text>
+
+    <!-- Bottom Specs Strip -->
+    <rect x="30" y="325" width="160" height="55" rx="4" fill="#143D22"/>
+    <text x="40" y="345" font-family="'Poppins', sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">Yield: 35-40 Qtl/Acre</text>
+    <text x="40" y="360" font-family="'Poppins', sans-serif" font-size="10" font-weight="600" fill="#F1C40F">Maturity: 105-110 Days</text>
+    <text x="40" y="373" font-family="'Poppins', sans-serif" font-size="8.5" fill="#AED6F1">Govt. Notified Hybrid Seed</text>
+  </g>
+
+  <!-- BAG 3 (Right - Taj Gold Hybrid Red Theme) -->
+  <g transform="translate(480, 110) rotate(6 100 200)" filter="url(#bagShadow)">
+    <path d="M30 40 Q25 15 50 15 L150 15 Q175 15 170 40 L185 310 Q180 340 150 340 L50 340 Q20 340 15 310 Z" fill="url(#bagRed)"/>
+    <line x1="30" y1="25" x2="170" y2="25" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="6 4"/>
+
+    <rect x="35" y="45" width="130" height="40" rx="4" fill="#FFFFFF"/>
+    <text x="50" y="70" font-family="'Playfair Display', serif" font-size="16" font-weight="900" fill="#D7262E">TAJ</text>
+    <text x="88" y="70" font-family="'Playfair Display', serif" font-size="16" font-weight="900" fill="#1F4E9C">SEEDS</text>
+
+    <rect x="30" y="105" width="140" height="30" fill="#F4D03F"/>
+    <text x="50" y="125" font-family="'Poppins', sans-serif" font-size="13" font-weight="bold" fill="#000000">TAJ GOLD</text>
+    <text x="48" y="150" font-family="'Poppins', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">RESEARCH HYBRID</text>
+
+    <circle cx="100" cy="205" r="38" fill="#FFFFFF" opacity="0.95"/>
+    <polygon points="100,175 110,195 130,200 115,215 120,235 100,222 80,235 85,215 70,200 90,195" fill="#F1C40F"/>
+
+    <rect x="35" y="260" width="130" height="50" rx="3" fill="#641E16" opacity="0.9"/>
+    <text x="45" y="280" font-family="'Poppins', sans-serif" font-size="9" fill="#FADBD8">Net Weight: 4.0 kg</text>
+    <text x="45" y="295" font-family="'Poppins', sans-serif" font-size="9" fill="#00FF66">Drought Tolerant Variety</text>
+  </g>
+
+  <!-- Golden grains spilled decoratively on table -->
+  <circle cx="280" cy="460" r="4" fill="#F39C12"/>
+  <circle cx="295" cy="455" r="5" fill="#F1C40F"/>
+  <circle cx="310" cy="465" r="4.5" fill="#E67E22"/>
+  <circle cx="510" cy="465" r="5" fill="#F1C40F"/>
+  <circle cx="525" cy="458" r="4" fill="#F39C12"/>
+  <circle cx="540" cy="463" r="4.5" fill="#E67E22"/>
+
+  <!-- Top Badge -->
+  <rect x="30" y="30" width="260" height="48" rx="24" fill="#1F5733" opacity="0.95"/>
+  <circle cx="54" cy="54" r="14" fill="#2E9E44"/>
+  <path d="M48 54 L52 58 L60 50" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="78" y="50" font-family="'Poppins', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Standard Packaging</text>
+  <text x="78" y="65" font-family="'Poppins', sans-serif" font-size="10" fill="#E2F0D9">Moisture-Proof Seed Bags</text>
+</svg>

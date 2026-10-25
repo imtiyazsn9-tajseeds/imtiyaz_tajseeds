@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" width="800" height="550">
+  <defs>
+    <linearGradient id="plantBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2C3E50"/>
+      <stop offset="100%" stop-color="#1A252F"/>
+    </linearGradient>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D5D8DC"/>
+      <stop offset="50%" stop-color="#EBEDEF"/>
+      <stop offset="100%" stop-color="#BDC3C7"/>
+    </linearGradient>
+    <linearGradient id="greenMachinery" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E9E44"/>
+      <stop offset="100%" stop-color="#1F5733"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Industrial Indoor Atmosphere -->
+  <rect width="800" height="550" fill="url(#plantBg)"/>
+  
+  <!-- Facility Ceiling Girders & High-Bay Lighting -->
+  <line x1="0" y1="40" x2="800" y2="40" stroke="#4A6572" stroke-width="6"/>
+  <line x1="0" y1="90" x2="800" y2="90" stroke="#34495E" stroke-width="3"/>
+  <!-- Truss work -->
+  <line x1="50" y1="40" x2="110" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="170" y1="40" x2="110" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="170" y1="40" x2="230" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="290" y1="40" x2="230" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="290" y1="40" x2="350" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="410" y1="40" x2="350" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="410" y1="40" x2="470" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="530" y1="40" x2="470" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="530" y1="40" x2="590" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="650" y1="40" x2="590" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="650" y1="40" x2="710" y2="90" stroke="#34495E" stroke-width="2"/>
+  <line x1="770" y1="40" x2="710" y2="90" stroke="#34495E" stroke-width="2"/>
+
+  <!-- High bay lights -->
+  <circle cx="200" cy="95" r="12" fill="#F9E79F" opacity="0.8"/>
+  <polygon points="170,95 230,95 300,260 100,260" fill="#F9E79F" opacity="0.08"/>
+  <circle cx="500" cy="95" r="12" fill="#F9E79F" opacity="0.8"/>
+  <polygon points="470,95 530,95 600,260 400,260" fill="#F9E79F" opacity="0.08"/>
+
+  <!-- Floor: Polished Epoxy Green Concrete -->
+  <rect x="0" y="380" width="800" height="170" fill="#1E382B"/>
+  <line x1="0" y1="400" x2="800" y2="400" stroke="#2E9E44" stroke-width="4" stroke-dasharray="20 10"/>
+
+  <!-- Seed Silos / Feed Hoppers -->
+  <!-- Silo 1 -->
+  <rect x="70" y="140" width="120" height="180" rx="6" fill="url(#metalGrad)" stroke="#7F8C8D" stroke-width="2"/>
+  <polygon points="70,320 190,320 145,380 115,380" fill="#BDC3C7"/>
+  <rect x="115" y="380" width="30" height="40" fill="#7F8C8D"/>
+  <text x="100" y="240" font-family="'Poppins', sans-serif" font-size="14" font-weight="bold" fill="#1F5733">RAW INFEED</text>
+  <text x="115" y="260" font-family="'Poppins', sans-serif" font-size="12" fill="#566573">SILO #01</text>
+
+  <!-- Conveyor Pipe System -->
+  <path d="M130 400 L240 400 L240 220 L300 220" fill="none" stroke="#2E9E44" stroke-width="12" stroke-linecap="round"/>
+  <path d="M300 220 L320 220" fill="none" stroke="#D7262E" stroke-width="12"/>
+
+  <!-- Main Processing Machine: Air Screen Cleaner & Gravity Separator -->
+  <rect x="290" y="190" width="220" height="190" rx="8" fill="url(#greenMachinery)" stroke="#145A32" stroke-width="3"/>
+  <!-- Machine Inspection Windows -->
+  <rect x="315" y="220" width="75" height="50" rx="4" fill="#AED6F1" stroke="#FFFFFF" stroke-width="2" opacity="0.9"/>
+  <rect x="410" y="220" width="75" height="50" rx="4" fill="#AED6F1" stroke="#FFFFFF" stroke-width="2" opacity="0.9"/>
+  
+  <!-- Grains moving inside visible through window -->
+  <circle cx="330" cy="245" r="3" fill="#F1C40F"/>
+  <circle cx="345" cy="235" r="3" fill="#F39C12"/>
+  <circle cx="360" cy="250" r="3" fill="#F1C40F"/>
+  <circle cx="340" cy="255" r="3" fill="#E67E22"/>
+  <circle cx="430" cy="240" r="3" fill="#F1C40F"/>
+  <circle cx="450" cy="250" r="3" fill="#F39C12"/>
+  <circle cx="465" cy="235" r="3" fill="#F1C40F"/>
+
+  <!-- Machine Controls & Gauges -->
+  <rect x="315" y="295" width="170" height="60" rx="4" fill="#17202A"/>
+  <circle cx="340" cy="325" r="14" fill="#2C3E50" stroke="#27AE60" stroke-width="2"/>
+  <line x1="340" y1="325" x2="348" y2="318" stroke="#E74C3C" stroke-width="2"/>
+  <circle cx="380" cy="325" r="14" fill="#2C3E50" stroke="#27AE60" stroke-width="2"/>
+  <line x1="380" y1="325" x2="386" y2="320" stroke="#F1C40F" stroke-width="2"/>
+  <!-- Digital Indicator -->
+  <rect x="415" y="312" width="60" height="26" rx="2" fill="#000000"/>
+  <text x="422" y="330" font-family="monospace" font-size="14" font-weight="bold" fill="#00FF66">99.8%</text>
+
+  <!-- Brand Label on Machine -->
+  <rect x="330" y="165" width="140" height="24" rx="4" fill="#FFFFFF"/>
+  <text x="345" y="181" font-family="'Playfair Display', serif" font-size="12" font-weight="bold" fill="#D7262E">TAJ</text>
+  <text x="375" y="181" font-family="'Playfair Display', serif" font-size="12" font-weight="bold" fill="#1F4E9C">SEEDS</text>
+  <text x="420" y="181" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1F5733">TECH</text>
+
+  <!-- Grading Cyclone & Aspirator unit on Right -->
+  <polygon points="560,170 660,170 630,310 590,310" fill="url(#metalGrad)" stroke="#7F8C8D" stroke-width="2"/>
+  <rect x="585" y="310" width="50" height="80" fill="#95A5A6"/>
+  <!-- Discharge Chute -->
+  <path d="M610 390 L610 430 L670 450" fill="none" stroke="#2E9E44" stroke-width="10" stroke-linecap="round"/>
+  
+  <!-- Operator in Safety Gear -->
+  <circle cx="230" cy="330" r="14" fill="#F5CBA7"/> <!-- Head -->
+  <polygon points="215,322 245,322 230,312" fill="#F39C12"/> <!-- Safety Helmet -->
+  <rect x="220" y="344" width="20" height="42" rx="4" fill="#2E9E44"/> <!-- Vest/Jacket -->
+  <rect x="220" y="386" width="9" height="34" fill="#2C3E50"/> <!-- Leg 1 -->
+  <rect x="231" y="386" width="9" height="34" fill="#2C3E50"/> <!-- Leg 2 -->
+  <rect x="212" y="352" width="28" height="18" rx="2" fill="#FFFFFF" stroke="#BDC3C7"/> <!-- Clipboard -->
+
+  <!-- Clean Grains falling into Collection Hopper -->
+  <polygon points="650,450 730,450 710,510 670,510" fill="#E67E22" opacity="0.9"/>
+  <text x="660" y="485" font-family="'Poppins', sans-serif" font-size="10" font-weight="bold" fill="#FFFFFF">GRADED SEED</text>
+
+  <!-- Top Badge -->
+  <rect x="30" y="30" width="260" height="48" rx="24" fill="#1F5733" opacity="0.95"/>
+  <circle cx="54" cy="54" r="14" fill="#2E9E44"/>
+  <path d="M48 54 L52 58 L60 50" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="78" y="50" font-family="'Poppins', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Precision Grading Plant</text>
+  <text x="78" y="65" font-family="'Poppins', sans-serif" font-size="10" fill="#E2F0D9">Air-Screen & Gravity Cleaners</text>
+</svg>

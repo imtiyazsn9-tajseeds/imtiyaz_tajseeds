@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120" width="460" height="120">
+  <defs>
+    <!-- Circle badge border gradient -->
+    <linearGradient id="crestBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4E8C5D"/>
+      <stop offset="50%" stop-color="#2E9E44"/>
+      <stop offset="100%" stop-color="#1B4D2C"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34C759"/>
+      <stop offset="100%" stop-color="#248A3D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left: Circular Brand Crest -->
+  <g transform="translate(10, 8)">
+    <!-- Outer rim -->
+    <circle cx="52" cy="52" r="50" fill="#FFFFFF" stroke="url(#crestBorder)" stroke-width="4"/>
+    <circle cx="52" cy="52" r="46" fill="#F4F8F3" stroke="#2E9E44" stroke-width="1" opacity="0.6"/>
+
+    <!-- Central Sprout with 5 Leaves (Exact match to official logo) -->
+    <!-- Center leaf -->
+    <path d="M52 46 C50 32 46 20 52 14 C58 20 54 32 52 46 Z" fill="url(#leafGrad)"/>
+    <!-- Top Left leaf -->
+    <path d="M52 46 C44 38 32 30 30 20 C42 22 48 34 52 46 Z" fill="#2E9E44"/>
+    <!-- Top Right leaf -->
+    <path d="M52 46 C60 38 72 30 74 20 C62 22 56 34 52 46 Z" fill="#2E9E44"/>
+    <!-- Bottom Left leaf -->
+    <path d="M52 48 C42 45 28 44 22 36 C34 35 44 42 52 48 Z" fill="#248A3D"/>
+    <!-- Bottom Right leaf -->
+    <path d="M52 48 C62 45 76 44 82 36 C70 35 60 42 52 48 Z" fill="#248A3D"/>
+    <!-- Red stem notch -->
+    <rect x="50" y="47" width="4" height="6" rx="2" fill="#D7262E"/>
+
+    <!-- Upper Green Line inside circle -->
+    <line x1="20" y1="53" x2="84" y2="53" stroke="#2E9E44" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- "TAJ" & "SEEDS" in Circle -->
+    <text x="24" y="68" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="900" fill="#D7262E" letter-spacing="0.5">TAJ</text>
+    <text x="52" y="68" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="900" fill="#1F4E9C" letter-spacing="0.5">SEEDS</text>
+
+    <!-- Lower Green Line inside circle -->
+    <line x1="20" y1="73" x2="84" y2="73" stroke="#2E9E44" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Tagline inside circle -->
+    <text x="52" y="85" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-size="7.5" font-weight="700" fill="#1B2A1E">Every Step with Farmer</text>
+  </g>
+
+  <!-- Right: Bold Corporate Wordmark -->
+  <g transform="translate(130, 22)">
+    <!-- "TAJ" in bold red serif -->
+    <text x="0" y="46" font-family="'Playfair Display', 'Times New Roman', Georgia, serif" font-size="48" font-weight="900" fill="#D7262E" letter-spacing="1.5">TAJ</text>
+    
+    <!-- "SEEDS" in bold blue serif -->
+    <text x="122" y="46" font-family="'Playfair Display', 'Times New Roman', Georgia, serif" font-size="48" font-weight="900" fill="#1F4E9C" letter-spacing="1.5">SEEDS</text>
+
+    <!-- Green divider line -->
+    <line x1="0" y1="56" x2="310" y2="56" stroke="#2E9E44" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Official Tagline in elegant italic serif -->
+    <text x="2" y="76" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-size="17" font-weight="600" fill="#1F5733" letter-spacing="0.5">Every Step with Farmer</text>
+  </g>
+</svg>
