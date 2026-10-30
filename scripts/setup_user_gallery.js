@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const userPhotosDir = path.join(__dirname, '..', 'assets', 'user_photos');
-const galleryDir = path.join(__dirname, '..', 'assets', 'gallery');
+const userPhotosDir = path.join(__dirname, '..', 'public', 'assets', 'user_photos');
+const galleryDir = path.join(__dirname, '..', 'public', 'assets', 'gallery');
 
 // Ensure destination directories exist
 if (!fs.existsSync(galleryDir)) {
@@ -38,11 +38,11 @@ copies.forEach(item => {
 });
 
 // Also copy user_photo_5.jpeg as hero-field.jpg
-const heroDest = path.join(__dirname, '..', 'assets', 'hero-field.jpg');
+const heroDest = path.join(__dirname, '..', 'public', 'assets', 'hero-field.jpg');
 fs.copyFileSync(path.join(userPhotosDir, 'user_photo_5.jpeg'), heroDest);
 console.log('Updated hero-field.jpg with user_photo_5.jpeg (factory image)');
 
 // Also set logo.png to user_photo_2.jpeg
-const logoDest = path.join(__dirname, '..', 'assets', 'logo.png');
+const logoDest = path.join(__dirname, '..', 'public', 'assets', 'logo.png');
 fs.copyFileSync(path.join(userPhotosDir, 'user_photo_2.jpeg'), logoDest);
 console.log('Updated logo.png with user_photo_2.jpeg (official brand logo)');

@@ -25,144 +25,81 @@ A complete, production-ready, multi-page corporate website built for **Taj Seeds
 ## 📂 Project Structure
 
 ```
-Taj-Seeds/
+imtiyaz_tajseeds/
+├── server/                  # Node.js backend (no dependencies)
+│   ├── index.js             # Starts the HTTP server
+│   ├── config.js            # Settings from environment variables
+│   ├── router.js            # API routes (protected by login unless marked public)
+│   ├── routes/              # session.js (login), images.js (photos), content.js (save data)
+│   ├── auth.js              # Sessions, password check, login rate limit
+│   ├── static.js            # Serves /public safely (no path traversal, hides dotfiles)
+│   ├── storage.js           # Writes the JSON data files and photos
+│   ├── images.js            # Checks uploaded photos (type, size, file signature)
+│   ├── validators.js        # Checks products / gallery / settings before saving
+│   └── http.js              # Shared request/response helpers
 │
-├── index.html                  # 1. Home Page (Hero, Stats, Journey Timeline, Mission, Objectives, Previews)
-├── about.html                  # 2. About Us Page (Heritage, 1980 Kishanganj to Medchal, Values, Leadership)
-├── products.html               # 3. Products Page (Filter tabs, live search, quick view modal, specs)
-├── gallery.html                # 4. 3D Interactive Gallery (Tilt cards, dynamic glare, category filter, Lightbox)
-├── quality.html                # 5. Quality & Infrastructure (5-step process pipeline, QC lab, storage, counters)
-├── contact.html                # 6. Contact Page (Validated inquiry form, Medchal address, phones, map, FAQs)
+├── public/                  # Everything the browser can open
+│   ├── *.html               # index, products, gallery, quality, about, contact, admin
+│   ├── data/                # products.json, gallery.json, site-config.json (single source of truth)
+│   ├── css/                 # style.css, pages.css, admin.css
+│   ├── js/
+│   │   ├── data.js          # Loads the JSON files
+│   │   ├── layout.js        # Shared top bar, header, mobile menu, footer, WhatsApp button
+│   │   ├── main.js, products.js, gallery.js, home-products.js, contact.js, site-config.js
+│   │   └── admin/           # Admin panel modules (api, auth, products, gallery, settings, ...)
+│   └── assets/              # logo, favicon, products/, gallery/, ...
 │
-├── css/
-│   ├── style.css               # Core design tokens, typography, sticky header, mobile drawer, footer, modals
-│   └── pages.css               # Specific page layouts, hero parallax, timeline, tilt cards, process steps
-│
-├── js/
-│   ├── main.js                 # Sticky header, mobile navigation, scroll-reveal observer, animated counters
-│   ├── products-data.js        # Centralized product catalog array (easy to add/edit products!)
-│   ├── products.js             # Live category filtering, search debounce, quick-view modal logic
-│   ├── gallery.js              # 3D interactive tilt engine, glare lighting, touch fallback, lightbox modal
-│   └── contact.js              # Client-side form validation, Indian phone number check, submit handler
-│
-└── assets/
-    ├── favicon.svg             # Sprout & grain vector favicon
-    ├── logo.svg                # Vector brand logo (Red TAJ, Blue SEEDS, green shoot crest)
-    ├── logo.png                # Drop-in placeholder for your actual logo image
-    ├── hero-field.svg          # High-resolution lush maize field vector illustration
-    ├── hero-field.jpg          # Drop-in placeholder for your actual hero field photo
-    └── gallery/
-        ├── warehouse.svg       # Medchal Central Logistics & Warehouse Facility
-        ├── processing-plant.svg# Air-Screen & Gravity Separation Plant
-        ├── seed-bags.svg       # Taj 9555 & Taj Gold seed bag packaging
-        ├── farm-field.svg      # High-yield hybrid maize demonstration field
-        ├── packaging.svg       # Automated robotic packaging and batch coding
-        ├── lab-testing.svg     # Quality testing & germination laboratory
-        ├── sorghum-field.svg   # High-sugar sweet sorghum & bajra trials
-        └── vegetable-nursery.svg# Research nursery (Tomato, Chili, Okra)
+├── tests/server.test.js     # Automated checks for login, uploads, saving, file serving
+├── scripts/                 # One-off import helpers
+├── docs/                    # Editing guide
+├── package.json
+└── .env.example
 ```
 
 ---
 
-## 🚀 Key Features
+## 🚀 Running the Website
 
-1. **Shared Sticky Header & Mobile Drawer:**
-   - Smooth backdrop blur and soft drop shadow on scroll.
-   - Company logo + text: `"Taj Seeds Agri Sciences"`.
-   - Desktop nav with active page indicator & animated underline hover.
-   - Phone link (`+91 9949003498`) and green CTA button.
-   - Touch-friendly mobile hamburger menu and animated drawer.
+Requires Node.js 18 or newer. There is nothing to install.
 
-2. **Home Page (`index.html`):**
-   - Full-screen hero with gradient overlay, headline, tagline, and dual CTAs.
-   - 4-item stats strip (45+ Years Legacy, 15+ States, 50,000+ Farmers, 98%+ Quality).
-   - **"Our Journey"** timeline:
-     - **1980:** Founder Mr. Abdus Salam opens *'Janta Beej Bhandar'* in Kishanganj, Bihar.
-     - **2015:** Md. Naushad establishes *'Taj Seeds'* in honor of brother Md. Mumtaj.
-     - **Today:** Modern Head Office and central warehouse in Medchal, Hyderabad.
-   - **"Our Mission"** quote banner.
-   - **Aim & Core Objectives** (4 animated cards with icons: High-Quality Seeds, R&D, Economic Growth, Sustainable Agriculture).
-   - Featured products, gallery preview, and Dealership CTA banner.
+```bash
+npm start          # http://localhost:8080
+npm run dev        # same, restarts when server files change
+npm test           # runs the automated server tests
+```
 
-3. **Products Catalog (`products.html`):**
-   - Category filter tabs: **All Hybrids**, **Maize / Corn**, **Sorghum / Jowar**, **Vegetables**.
-   - Real-time search filter by product name, botanical name, or trait.
-   - Product cards with specifications (Maturity days, Yield potential, Suitable soil/season).
-   - "Enquire Now" pre-fills the Contact form with the selected product.
-   - "Quick View" modal popup.
-   - Easily editable via `js/products-data.js`.
+Settings come from environment variables (see `.env.example`):
 
-4. **3D Interactive Gallery (`gallery.html`):**
-   - **Perspective 3D Tilt:** Follows cursor position with realistic depth and dynamic glare/shine reflection.
-   - **Touch Device Fallback:** Automatically switches to clean touch scale on mobile phones and tablets.
-   - **Lightbox Modal:** Full-screen zoom, image captions, previous/next buttons, plus keyboard arrow navigation (`←` / `→`) and `ESC` to close.
-   - Category filters: All, Farm, Plant, Warehouse, Packaging.
+| Variable | Default | Purpose |
+|---|---|---|
+| `PORT` | `8080` | Port to listen on |
+| `ADMIN_ID` | `tajseeds` | Admin login ID (spaces/case are ignored, so "Taj Seeds" works) |
+| `ADMIN_PASSWORD` | `0099` | Admin password. **Set your own before going online.** |
+| `TRUST_PROXY` | `0` | Set to `1` behind nginx/Cloudflare |
 
-5. **Quality & Infrastructure (`quality.html`):**
-   - Animated statistics counters (Years of Legacy, Farmers Empowered, States Covered, Annual MT).
-   - **5-Step Process Pipeline:** Seed Production & Roguing → Conditioning & Processing → Quality Testing → Protective Packing → Delivery.
-   - Photographic features with detailed captions: Seed Cleaning, Grading, QC Laboratory, and Medchal Warehouse.
+Example: `ADMIN_PASSWORD=my-secret npm start`
 
-6. **Contact Page (`contact.html`):**
-   - Form fields: Full Name, Phone, Email, State/District, Enquiry Type, Message.
-   - Real-time client-side validation with Indian phone number regex.
-   - Pre-fills from Product Quick Enquire clicks (`?product=...`).
-   - Placeholder endpoint configured for **tajseeds15@gmail.com**.
-   - Side card with complete registered address:
-     > **Taj Seeds Agri Sciences**  
-     > Plot No. 57 & 58, Flat No. 03, Kurish Homes, Uma Nagar, MRR Colony,  
-     > Medchal Village, Medchal Mandal, Medchal-Malkajgiri Dist., Pin 501401, Telangana.  
-     > **Phone:** +91 9949003498, +91 9113409962  
-     > **Email:** tajseeds15@gmail.com
-   - Embedded Google Map of Medchal, Hyderabad.
-   - Frequently Asked Questions (FAQ) for dealers and farmers.
-
-7. **Floating WhatsApp Button:**
-   - Present on all 6 pages at bottom-right (`wa.me/919949003498`).
-   - One-click direct chat with pre-filled greeting.
+> The pages load their data with `fetch`, so open the site through the server
+> (not by double-clicking the HTML files).
 
 ---
 
-## 🛠️ How to Replace Images & Text
+## 🔐 Admin Panel
 
-### 1. Replacing Logo:
-Place your transparent PNG logo at `assets/logo.png`.  
-The HTML automatically falls back to `assets/logo.svg` if `logo.png` is absent or still being uploaded!
+Open `/admin.html` and sign in. Login is checked by the server; the browser only
+receives a secure session cookie. After 5 wrong passwords a visitor is locked out for 15 minutes.
 
-### 2. Replacing Hero Background Image:
-Place your real photo at `assets/hero-field.jpg`. The CSS seamlessly prioritizes `hero-field.jpg` and falls back to `assets/hero-field.svg`.
-
-### 3. Adding or Editing Products:
-Open `js/products-data.js` and add or modify any item in the `TAJ_PRODUCTS` array. Each product has:
-```javascript
-{
-  id: "taj-9555",
-  name: "Taj 9555 Hybrid Maize",
-  category: "maize", // 'maize' | 'sorghum' | 'vegetables'
-  categoryLabel: "Maize / Corn",
-  badge: "Top Seller",
-  botanical: "Zea mays L.",
-  description: "High-yielding single cross hybrid maize...",
-  maturity: "105 - 110 Days",
-  yield: "38 - 42 Qtl / Acre",
-  suitability: "Kharif & Rabi (All Soils)",
-  packaging: "4 kg & 10 kg bags",
-  image: "assets/gallery/seed-bags.svg"
-}
-```
-
-### 4. Modifying Contact Form Endpoint:
-In `contact.html`, change the form action:
-```html
-<form id="contactForm" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
-```
-Submissions are formatted to deliver directly to `tajseeds15@gmail.com`.
+- **Home Page Seeds / All Seeds Catalog:** add, edit, delete products, upload photos, choose which seeds show on the home page.
+- **Gallery Photos:** add, edit, delete gallery photos and sections.
+- **Contact & Info:** phone numbers, email, address, tagline, WhatsApp number.
+- Changes are applied on the page first. Click **Save Changes** to publish them to the website.
 
 ---
 
-## 🌐 Opening the Website
+## 🛠️ Editing Content & Code
 
-Simply double-click `index.html` in your browser, or serve it using any lightweight static web server:
-- Python: `python -m http.server 8000`
-- VS Code: Right-click `index.html` &rarr; "Open with Live Server"
-- Node: `npx serve`
+- **Products, gallery, contact details:** use the admin panel. It writes `public/data/*.json`, which every page reads.
+- **Header / footer / mobile menu:** edit `public/js/layout.js` once; all pages update.
+- **Logo:** replace `public/assets/logo.png` (transparent PNG) and `public/assets/favicon.png`.
+- **Hero image:** replace `public/assets/hero-field.jpg`.
+- **Contact form endpoint:** in `public/contact.html`, change the form `action` to your Formspree (or similar) URL.

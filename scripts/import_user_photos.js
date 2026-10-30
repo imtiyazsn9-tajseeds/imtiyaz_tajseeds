@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const srcDir = 'C:\\Users\\mdaqu\\Downloads';
-const destDir = path.join(__dirname, '..', 'assets', 'user_photos');
+const destDir = path.join(__dirname, '..', 'public', 'assets', 'user_photos');
 
 if (!fs.existsSync(destDir)) {
   fs.mkdirSync(destDir, { recursive: true });

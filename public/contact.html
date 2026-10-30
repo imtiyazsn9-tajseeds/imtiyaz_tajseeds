@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & Dealership Inquiries | Taj Seeds Agri Sciences</title>
+  <meta name="description" content="Contact Taj Seeds Agri Sciences Pvt. Ltd. at Medchal, Hyderabad. Phones: +91 9949003498, +91 9113409962. Email: tajseeds15@gmail.com. Apply for seed dealerships.">
+  <meta name="keywords" content="Taj Seeds contact, seed dealership Hyderabad, Medchal seeds company, Taj Seeds phone number, Abdus Salam, Md Naushad">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact Us | Taj Seeds Agri Sciences">
+  <meta property="og:description" content="Get in touch for seed inquiries, dealership applications, and bulk agricultural supply.">
+  <meta property="og:image" content="assets/logo.png">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <script src="js/layout.js" data-part="header"></script>
+
+  <!-- ================= PAGE BANNER ================= -->
+  <section class="page-banner contact-hero-banner">
+    <div class="container page-banner-content">
+      <div class="page-breadcrumbs">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Contact</span>
+      </div>
+      <h1 class="page-banner-title">Get in Touch with Taj Seeds</h1>
+      <p class="page-banner-subtitle">
+        Have questions about our seed varieties, want to book a bulk consignment, or wish to become an authorized distributor? We are here to assist you at every step.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT FORM & CORPORATE DETAILS ================= -->
+  <section class="contact-page-section">
+    <div class="container">
+      <div class="contact-layout-grid">
+        
+        <!-- Left: Validated Contact Form -->
+        <div class="contact-form-card reveal reveal-left">
+          <div style="margin-bottom: 28px;">
+            <h2 style="font-size: 2rem; color: var(--color-forest-dark);">Send Us a Message</h2>
+            <p style="color: var(--color-text-muted); font-size: 0.925rem;">
+              Fill in your details below and our commercial agronomy team will respond to your query within 24 hours.
+            </p>
+          </div>
+
+          <!-- Success Box (Hidden initially) -->
+          <div id="formSuccessBox" style="display: none; background: #E8F8F5; border: 1.5px solid var(--color-leaf-green); border-radius: var(--radius-md); padding: 20px; margin-bottom: 24px;">
+            <div style="display: flex; align-items: flex-start; gap: 14px;">
+              <svg style="width: 24px; height: 24px; fill: var(--color-leaf-green); min-width: 24px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <div>
+                <h4 style="color: var(--color-forest-dark); font-size: 1.05rem; margin-bottom: 4px;">Thank You! Your Enquiry Has Been Sent</h4>
+                <p style="color: var(--color-text-muted); font-size: 0.875rem; line-height: 1.5;">
+                  Your message has been routed to <strong>tajseeds15@gmail.com</strong>. One of our regional coordinators will contact you shortly at the provided phone number.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- The Form -->
+          <form id="contactForm" action="https://formspree.io/f/tajseeds15@gmail.com" method="POST" novalidate>
+            
+            <!-- Row 1: Name & Phone -->
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="formName" class="form-label">Full Name <span class="text-red">*</span></label>
+                <input type="text" id="formName" name="name" class="form-input" placeholder="e.g. Ramesh Kumar Patel" required>
+                <span class="field-error-msg">Please enter your full name.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="formPhone" class="form-label">Mobile Phone Number <span class="text-red">*</span></label>
+                <input type="tel" id="formPhone" name="phone" class="form-input" placeholder="e.g. +91 9949003498" required>
+                <span class="field-error-msg">Please enter a valid 10-digit mobile number.</span>
+              </div>
+            </div>
+
+            <!-- Row 2: Email & State/District -->
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="formEmail" class="form-label">Email Address <span class="text-red">*</span></label>
+                <input type="email" id="formEmail" name="email" class="form-input" placeholder="e.g. ramesh@gmail.com" required>
+                <span class="field-error-msg">Please enter a valid email address.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="formLocation" class="form-label">State & District <span class="text-red">*</span></label>
+                <input type="text" id="formLocation" name="state_district" class="form-input" placeholder="e.g. Medchal, Telangana" required>
+                <span class="field-error-msg">Please specify your state and district.</span>
+              </div>
+            </div>
+
+            <!-- Row 3: Enquiry Type -->
+            <div class="form-group">
+              <label for="enquiryType" class="form-label">Enquiry Type <span class="text-red">*</span></label>
+              <select id="enquiryType" name="enquiry_type" class="form-select" required>
+                <option value="Product Enquiry">Product Enquiry (Maize / Sorghum / Vegetables)</option>
+                <option value="Dealership">Dealership / Distributorship Application</option>
+                <option value="Bulk Order">Bulk Order / Commercial Farming</option>
+                <option value="Agronomic Advisory">Agronomic Advisory / Crop Guidance</option>
+                <option value="Other">Other Query</option>
+              </select>
+              <span class="field-error-msg">Please select an enquiry category.</span>
+            </div>
+
+            <!-- Row 4: Message -->
+            <div class="form-group">
+              <label for="formMessage" class="form-label">Message Details <span class="text-red">*</span></label>
+              <textarea id="formMessage" name="message" class="form-textarea" placeholder="Describe the hybrid variety, quantity required, acreage, or dealership location you are inquiring about..." required></textarea>
+              <span class="field-error-msg">Please enter at least 8 characters.</span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">
+              Submit Inquiry
+              <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+            
+            <p style="text-align: center; font-size: 0.775rem; color: var(--color-text-light); margin-top: 14px;">
+              We respect your privacy. Inquiries are sent confidentially to <strong>tajseeds15@gmail.com</strong>.
+            </p>
+          </form>
+        </div>
+
+        <!-- Right: Official Company Card -->
+        <div class="contact-info-card reveal reveal-right">
+          <span style="font-size: 0.8rem; font-weight: 700; color: #8CE89D; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+            Official Corporate Headquarters
+          </span>
+          <h3 class="card-title">Taj Seeds Agri Sciences</h3>
+          <p class="tagline-serif" style="color: #FFF5CC; font-size: 1.1rem; margin-bottom: 12px;">"Every Step with Farmer"</p>
+          
+          <div class="contact-details-list">
+            
+            <!-- Address -->
+            <div class="contact-detail-row">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Registered Head Office & Warehouse</h4>
+                <p>
+                  Plot No. 57 & 58, Flat No. 03, Kurish Homes, Uma Nagar, MRR Colony,<br>
+                  Medchal Village, Medchal Mandal, Medchal-Malkajgiri Dist.,<br>
+                  <strong>Pin 501401, Telangana, India.</strong>
+                </p>
+              </div>
+            </div>
+
+            <!-- Phone Numbers -->
+            <div class="contact-detail-row">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Telephone Support</h4>
+                <p>
+                  Primary: <a href="tel:+919949003498" style="color: #FFFFFF; font-weight: 700;">+91 9949003498</a><br>
+                  Secondary: <a href="tel:+919113409962" style="color: #FFFFFF; font-weight: 700;">+91 9113409962</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-detail-row">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Official Email Address</h4>
+                <p>
+                  <a href="mailto:tajseeds15@gmail.com" style="color: #8CE89D; text-decoration: underline;">tajseeds15@gmail.com</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Working Hours -->
+            <div class="contact-detail-row">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Operating Hours</h4>
+                <p>
+                  Monday &ndash; Saturday: 9:00 AM &ndash; 6:30 PM (IST)<br>
+                  Sunday: Closed (Dispatch on request)
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
+            <a href="https://wa.me/919949003498" target="_blank" class="btn btn-outline-white" style="width: 100%; border-color: #25D366; color: #25D366; background: rgba(37, 211, 102, 0.1);">
+              <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+              Quick WhatsApp Inquiry
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= EMBEDDED GOOGLE MAP ================= -->
+      <div style="margin-top: 40px;" class="reveal">
+        <div class="section-header" style="margin-bottom: 24px; text-align: left;">
+          <h3 style="font-size: 1.85rem; color: var(--color-forest-dark);">Interactive Location Map</h3>
+        </div>
+        <div class="map-container">
+          <!-- Google Maps Embed for Medchal, Hyderabad, Telangana 501401 -->
+          <iframe 
+            title="Taj Seeds Agri Sciences Location Map - Medchal Hyderabad"
+            src="https://maps.google.com/maps?q=Medchal,%20Hyderabad,%20Telangana%20501401&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+            loading="lazy" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- ================= FREQUENTLY ASKED QUESTIONS ================= -->
+      <div style="margin-top: 80px;" class="reveal">
+        <div class="section-header">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <div class="brand-divider">
+            <span class="line"></span>
+            <svg class="leaf-icon" viewBox="0 0 24 24"><path d="M17 8C8 10 5 16 5 21C10 21 16 18 18 9C18 8.66 17.5 8 17 8Z"/></svg>
+            <span class="line right"></span>
+          </div>
+        </div>
+
+        <div style="max-width: 840px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px;">
+          
+          <div style="background: #FFFFFF; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+            <h4 style="font-size: 1.15rem; color: var(--color-forest-dark); margin-bottom: 8px;">How do I apply for an authorized seed dealership?</h4>
+            <p style="font-size: 0.925rem; color: var(--color-text-muted); line-height: 1.6;">
+              Select "Dealership" in the enquiry form above or call our commercial desk at <strong>+91 9949003498</strong>. Our regional sales team will verify your seed license and share commercial trade terms.
+            </p>
+          </div>
+
+          <div style="background: #FFFFFF; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+            <h4 style="font-size: 1.15rem; color: var(--color-forest-dark); margin-bottom: 8px;">What is the minimum germination percentage on Taj Seeds bags?</h4>
+            <p style="font-size: 0.925rem; color: var(--color-text-muted); line-height: 1.6;">
+              We guarantee a minimum of <strong>98%+ germination</strong> and genetic purity across all hybrid maize and sorghum varieties, certified by our accredited QC testing laboratory.
+            </p>
+          </div>
+
+          <div style="background: #FFFFFF; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+            <h4 style="font-size: 1.15rem; color: var(--color-forest-dark); margin-bottom: 8px;">Do you deliver seed consignments across India?</h4>
+            <p style="font-size: 0.925rem; color: var(--color-text-muted); line-height: 1.6;">
+              Yes. With our centralized dispatch warehouse in Medchal, Hyderabad, we fulfill full-truckload (FTL) and part-truckload (PTL) seed dispatches to over 15 Indian states including Telangana, Andhra Pradesh, Bihar, Maharashtra, Karnataka, and Uttar Pradesh.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="js/layout.js" data-part="footer"></script>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

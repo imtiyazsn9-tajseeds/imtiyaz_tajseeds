@@ -1,0 +1,27 @@
+{
+  "company": {
+    "brandName": "Taj Seeds Agri Sciences",
+    "legalName": "Taj Seeds Agri Sciences Pvt. Ltd.",
+    "tagline": "Every Step with Farmer",
+    "taglineHindi": "",
+    "foundedYear": 1980,
+    "corporateYear": 2015,
+    "logoPath": "assets/logo.png",
+    "phone1": "9263714728",
+    "phone1Raw": "9263714728",
+    "phone2": "+91 9113409962",
+    "phone2Raw": "+919113409962",
+    "whatsapp": "9263714728",
+    "whatsappMessage": "Hello Taj Seeds Agri Sciences, I would like to inquire about your hybrid seed products.",
+    "email": "tajseeds15@gmail.com",
+    "address": {
+      "full": "Plot No. 57 & 58, Flat No. 03, Kurish Homes, Medchal, Hyderabad - 501401"
+    },
+    "googleMapUrl": "https://maps.google.com/maps?q=Medchal,%20Hyderabad,%20Telangana%20501401&t=&z=13&ie=UTF8&iwloc=&output=embed"
+  },
+  "social": {
+    "whatsapp": "https://wa.me/9263714728",
+    "email": "mailto:tajseeds15@gmail.com",
+    "phone": "tel:9263714728"
+  }
+}

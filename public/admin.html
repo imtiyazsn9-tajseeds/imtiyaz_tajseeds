@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taj Seeds - Admin Portal & Content Manager</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ================= 1. SECURE LOGIN SCREEN (ID & PASSWORD) ================= -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <img src="assets/logo.png" alt="Taj Seeds" class="login-logo">
+      <h2 style="font-size: 1.45rem; color: #1F5733; margin: 0 0 4px; font-family: var(--font-heading);">Taj Seeds Admin Portal</h2>
+      <p style="font-size: 0.85rem; color: #666; margin: 0 0 22px;">Authorized Management Access (एडमिन लॉगिन)</p>
+
+      <div id="loginErrorMsg" style="display: none; background: #FEE2E2; border: 1px solid #FCA5A5; color: #991B1B; padding: 11px 14px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 18px; text-align: left; font-weight: 500;">
+        <div style="display: flex; align-items: flex-start; gap: 8px;">
+          <svg class="icon-svg" style="fill: #991B1B; margin-top: 2px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          <div id="loginErrorText">Invalid Login ID or Password.</div>
+        </div>
+      </div>
+
+      <form id="adminLoginForm" style="display: flex; flex-direction: column; gap: 16px; text-align: left;">
+        <div class="form-group">
+          <label class="form-label" style="font-size: 0.85rem; color: #374151;">Admin ID (यूजर आईडी):</label>
+          <input type="text" id="adminLoginId" class="form-input" placeholder="e.g. taj seeds" required autocomplete="username" style="padding: 12px 14px; font-size: 16px;">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="font-size: 0.85rem; color: #374151;">Password (पासवर्ड):</label>
+          <div style="position: relative;">
+            <input type="password" id="adminLoginPass" class="form-input" placeholder="Enter password" required autocomplete="current-password" style="width: 100%; padding: 12px 44px 12px 14px; font-size: 16px;">
+            <button type="button" id="togglePassVisibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6B7280; padding: 6px; display: flex; align-items: center; justify-content: center;" title="Show or Hide Password" aria-label="Toggle password visibility">
+              <svg id="eyeIcon" class="icon-svg" style="width: 18px; height: 18px;" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 13px; font-size: 1rem; margin-top: 6px; box-shadow: 0 6px 18px rgba(46, 158, 68, 0.35);">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          Sign In to Admin Portal (लॉगिन करें)
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #E5E7EB; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #6B7280;">
+        <span>Taj Seeds Agri Sciences</span>
+        <a href="index.html" style="color: #2E9E44; text-decoration: none; font-weight: 600;">Back to Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. MAIN ADMIN DASHBOARD ================= -->
+  <div id="adminDashboard" style="display: none;">
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-brand">
+          <a href="index.html">
+            <img src="assets/logo.png" alt="Taj Seeds" style="height: 42px;">
+          </a>
+          <div>
+            <h2 style="font-size: 1.15rem; margin: 0; color: var(--color-forest-dark);">Taj Seeds Website Admin Panel</h2>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);">LoggedIn as: <strong>taj seeds</strong> | Zero-Code Management</span>
+          </div>
+        </div>
+        <div class="admin-header-actions">
+          <a href="index.html" target="_blank" class="btn btn-outline-forest btn-sm" style="padding: 9px 16px; font-size: 0.85rem;">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            View Website
+          </a>
+          <button id="saveAllBtn" class="btn btn-primary btn-sm" style="padding: 10px 22px; font-size: 0.9rem; box-shadow: 0 4px 14px rgba(46,158,68,0.35);">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+            Save Changes (सेव करें)
+          </button>
+          <button id="logoutBtn" class="btn btn-sm" style="padding: 9px 14px; font-size: 0.85rem; background: #FEE2E2; color: #B91C1C; border: 1px solid #FCA5A5; cursor: pointer; border-radius: 20px;">
+            <svg class="icon-svg" style="fill: #B91C1C;" viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-container">
+
+      <!-- Notification Banner -->
+      <div id="saveAlert" class="alert-banner alert-success">
+        <svg class="icon-svg" style="fill: #166534;" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        <span>Sabhi badlav successfully save ho gaye hain! Website refresh karke dekhein.</span>
+      </div>
+
+      <div id="unsavedAlert" class="alert-banner alert-warning">
+        <span style="flex: 1;">Badlav abhi sirf is page par hain, website par live nahi hue. Upar <strong>"Save Changes (सेव करें)"</strong> dabayein.</span>
+        <button type="button" class="btn btn-primary btn-sm save-trigger-btn" style="padding: 8px 16px; font-size: 0.85rem;">Save Changes</button>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab-btn is-active" data-tab="tab-home-products">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          Home Page Seeds (होम पेज बीज)
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-products">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.5 2 12c0 3.58 2.5 6.58 6 7.5v-2.13C5.54 16.5 4 14.48 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.48-1.54 4.5-4 5.37V19.5c3.5-.92 6-3.92 6-7.5 0-5.5-4.5-9-10-9zm1 14.93V8h-2v9.93c-2.33-.46-4-2.48-4-4.93 0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.45-1.67 4.47-4 4.93z"/></svg>
+          All Seeds Catalog (सभी बीज)
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-contact">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          Contact & Info (फोन व पता)
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-gallery">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          Photos & Gallery (गैलरी)
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-guide">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+          Simple Guide (गाइड)
+        </button>
+      </div>
+
+      <!-- ================= TAB 1: HOME PAGE FEATURED SEEDS ================= -->
+      <div class="tab-content is-active" id="tab-home-products">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+            <div>
+              <h3 class="card-title" style="margin: 0;">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                Home Page Featured Seeds (होम पेज पर दिखने वाले बीज)
+              </h3>
+              <p class="card-subtitle" style="margin: 4px 0 0;">
+                Aap jis-jis beej par click karenge, woh beej <strong>Home Page</strong> par dikhne lagega. 
+                (Aap aam taur par 4 beej chunte hain, par jitne chahein utne chun sakte hain).
+              </p>
+            </div>
+            <div style="background: #E8F5E9; padding: 6px 14px; border-radius: 20px; font-weight: 700; color: #1F5733; font-size: 0.9rem;" id="featuredCounter">
+              4 Seeds Selected for Home Page
+            </div>
+          </div>
+
+          <div class="home-featured-selector-grid" id="homeFeaturedSelectorGrid">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <button class="btn btn-primary btn-sm save-trigger-btn" style="padding: 10px 24px;">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+              Save Home Page Changes (होम पेज सेव करें)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 2: ALL PRODUCTS CATALOG ================= -->
+      <div class="tab-content" id="tab-products">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <div>
+              <h3 class="card-title" style="margin: 0;">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.5 2 12c0 3.58 2.5 6.58 6 7.5v-2.13C5.54 16.5 4 14.48 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.48-1.54 4.5-4 5.37V19.5c3.5-.92 6-3.92 6-7.5 0-5.5-4.5-9-10-9zm1 14.93V8h-2v9.93c-2.33-.46-4-2.48-4-4.93 0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.45-1.67 4.47-4 4.93z"/></svg>
+                All Seeds Catalog (सभी बीज प्रोडक्ट्स)
+              </h3>
+              <p class="card-subtitle" style="margin: 4px 0 0;">Yahan se naya beej jod sakte hain, photo upload kar sakte hain, ya maujooda beej edit kar sakte hain.</p>
+            </div>
+            <button id="addNewProductBtn" class="btn btn-primary btn-sm" style="padding: 10px 18px;">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              Add New Seed (नया बीज जोड़ें)
+            </button>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="products-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Home Page</th>
+                  <th>Maturity</th>
+                  <th>Pack Size</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <!-- Dynamically rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: CONTACT & COMPANY ================= -->
+      <div class="tab-content" id="tab-contact">
+        <div class="admin-card">
+          <h3 class="card-title">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            Company Phone Numbers & Email (संपर्क सूत्र)
+          </h3>
+          <p class="card-subtitle">Yahan par phone number ya email badalne se puri website par update ho jayega.</p>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Phone Number 1 (मुख्य फोन):</label>
+              <input type="text" id="cfgPhone1" class="form-input" value="+91 9949003498">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number 2 (दूसरा फोन):</label>
+              <input type="text" id="cfgPhone2" class="form-input" value="+91 9113409962">
+            </div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp Number (बिना + या स्पेस के, e.g. 919949003498):</label>
+              <input type="text" id="cfgWhatsapp" class="form-input" value="919949003498">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address (ईमेल):</label>
+              <input type="email" id="cfgEmail" class="form-input" value="tajseeds15@gmail.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3 class="card-title">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Registered Office & Warehouse Address (पता)
+          </h3>
+          <p class="card-subtitle">Medchal, Hyderabad corporate office and warehouse address details.</p>
+          
+          <div class="form-group">
+            <label class="form-label">Full Address (पूरा पता):</label>
+            <textarea id="cfgAddressFull" rows="3" class="form-textarea">Plot No. 57 & 58, Flat No. 03, Kurish Homes, Uma Nagar, MRR Colony, Medchal Village, Medchal Mandal, Medchal-Malkajgiri Dist., Pin 501401, Telangana, India.</textarea>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3 class="card-title">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+            Tagline & Motto (स्लोगन)
+          </h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Tagline (English):</label>
+              <input type="text" id="cfgTagline" class="form-input" value="Every Step with Farmer">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tagline (Hindi):</label>
+              <input type="text" id="cfgTaglineHindi" class="form-input" value="हर कदम किसान के साथ">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: GALLERY ================= -->
+      <div class="tab-content" id="tab-gallery">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+            <div>
+              <h3 class="card-title" style="margin: 0;">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Gallery Photos & Sections Manager (फोटो व गैलरी मैनेजमेंट)
+              </h3>
+              <p class="card-subtitle" style="margin: 4px 0 0;">
+                Nayi photos upload karein, description ya section badlein, aur unwanted photos hatayein (delete karein).
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button type="button" id="addNewGalleryBtn" class="btn btn-primary btn-sm" style="padding: 10px 18px; font-size: 0.88rem;">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                Add New Photo (नयी फोटो जोड़ें)
+              </button>
+              <button type="button" class="btn btn-forest btn-sm save-trigger-btn" style="padding: 10px 18px; font-size: 0.88rem;">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                Save Gallery Changes (सेव करें)
+              </button>
+            </div>
+          </div>
+
+          <!-- Category Filter Pills & Counter -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; border-bottom: 1px solid var(--admin-border); padding-bottom: 12px;">
+            <div class="gallery-filter-pills" id="galleryAdminFilterPills">
+              <button type="button" class="gallery-filter-pill is-active" data-cat="all">All Photos</button>
+              <button type="button" class="gallery-filter-pill" data-cat="farm">Farm & Trials</button>
+              <button type="button" class="gallery-filter-pill" data-cat="plant">Processing Plant</button>
+              <button type="button" data-cat="warehouse" class="gallery-filter-pill">Warehouse</button>
+              <button type="button" data-cat="packaging" class="gallery-filter-pill">Packaging & Security</button>
+            </div>
+            <div id="galleryCountBadge" style="font-size: 0.82rem; font-weight: 600; color: #4B5563; background: #F3F4F6; padding: 5px 14px; border-radius: 20px;">
+              Showing Photos
+            </div>
+          </div>
+
+          <!-- Dynamic Gallery Cards Grid -->
+          <div class="gallery-admin-grid" id="galleryAdminGrid">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <button type="button" class="btn btn-primary btn-sm save-trigger-btn" style="padding: 10px 24px;">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+              Save Gallery Changes (गैलरी सुरक्षित करें)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 5: SIMPLE GUIDE ================= -->
+      <div class="tab-content" id="tab-guide">
+        <div class="admin-card">
+          <h3 class="card-title">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+            Baad Mein Website Manage Karne Ki Aasan Guide
+          </h3>
+          <div style="line-height: 1.8; color: #374151; font-size: 0.95rem;">
+            <h4 style="color: var(--color-forest-dark); margin-top: 16px;">1. Login ID & Password:</h4>
+            <p>Admin Portal ka login credentials hai:<br>
+            - <strong>Admin ID:</strong> <code>taj seeds</code><br>
+            - <strong>Password:</strong> <code>0099</code></p>
+
+            <h4 style="color: var(--color-forest-dark); margin-top: 16px;">2. Website Par Admin Login Kahan Hai?</h4>
+            <p>Admin Login ab website par 3 aasan jagahon par uplabdh hai:<br>
+            - <strong>Footer Bottom Bar:</strong> Sabhi pages ke footer mein niche "Admin Portal" link par click karein.<br>
+            - <strong>Mobile Drawer:</strong> Phone mein menu kholte hi niche "Admin Portal Login" button milega.<br>
+            - <strong>Top Announcement Bar:</strong> Computer par upar daayein taraph "Admin Portal" link se khol sakte hain.</p>
+
+            <h4 style="color: var(--color-forest-dark); margin-top: 16px;">3. Home Page Ke Products Kaise Badlein?</h4>
+            <p>Upar <strong>"Home Page Seeds"</strong> tab par click karein. Jis-jis beej par aap click karenge, woh select (green) ho jayega. Fir upar <strong>"Save Changes"</strong> par click kar dein. Wahi beej Home page par dikhne lagenge!</p>
+
+            <h4 style="color: var(--color-forest-dark); margin-top: 16px;">4. Naya Seed Product Kaise Jodein Aur Photo Upload Karein?</h4>
+            <p><strong>"All Seeds Catalog"</strong> tab mein jayein aur <strong>"Add New Seed"</strong> button dabayein. Wahan aapko <strong>"Upload Photo"</strong> ka option milega. Apne phone ya computer se seed pouch ki photo chunein, details bharein aur Save kar dein.</p>
+
+            <h4 style="color: var(--color-forest-dark); margin-top: 16px;">5. Gallery Photos, Description Aur Section Kaise Badlein Ya Hatayein?</h4>
+            <p><strong>"Photos & Gallery"</strong> tab par jayein:<br>
+            - <strong>Nayi Photo Upload Karein:</strong> <strong>"Add New Photo"</strong> button dabayein. Apne phone ya PC se photo chunein, category select karein (Farm & Trials, Processing Plant, Warehouse, Packaging & Security), title aur description likhein aur Save kar dein.<br>
+            - <strong>Existing Photo / Description Edit Karein:</strong> Kisi bhi photo card par <strong>"Edit / Change Photo"</strong> button dabayein aur details update kar dein.<br>
+            - <strong>Photo Hatayein (Delete):</strong> Kisi bhi unwanted photo card par <strong>"Delete"</strong> button dabakar use hata dein.<br>
+            - Sabhi badlav ke baad upar ya niche <strong>"Save Gallery Changes"</strong> button dabana na bhulein!</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Product Modal (Add / Edit with Real Image Upload & Home Feature Toggle) -->
+    <div class="admin-modal-overlay" id="productModalOverlay">
+      <div class="admin-modal">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+          <h3 id="modalTitle" style="margin: 0; color: var(--color-forest-dark);">Edit Seed Product</h3>
+          <button id="closeModalBtn" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #666; line-height: 1; padding: 4px;" aria-label="Close modal">&times;</button>
+        </div>
+        
+        <form id="productForm" style="display: flex; flex-direction: column; gap: 16px;">
+          <input type="hidden" id="prodEditId">
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Product Name (English):</label>
+              <input type="text" id="prodName" class="form-input" required placeholder="e.g. KING-7244">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Hindi Name (हिंदी नाम):</label>
+              <input type="text" id="prodHindiName" class="form-input" placeholder="e.g. किंग-7244 मक्का">
+            </div>
+          </div>
+
+          <!-- ================= PRODUCT IMAGE SELECTOR & UPLOAD ================= -->
+          <div class="image-picker-box">
+            <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Product Image / Photo (बीज पाउच की फोटो):</span>
+              <span id="uploadStatusBadge" style="font-size: 0.78rem; color: #166534; font-weight: 600; display: none;">Uploaded</span>
+            </label>
+
+            <div class="image-preview-row">
+              <img id="modalImgPreview" src="assets/logo.png" alt="Preview" class="image-preview-thumb">
+              <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                <input type="file" id="prodImageFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;">
+                <button type="button" id="triggerUploadBtn" class="btn btn-forest btn-sm" style="padding: 9px 14px; font-size: 0.85rem; width: fit-content;">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+                  Upload Photo from Computer (फोटो अपलोड करें)
+                </button>
+                <span style="font-size: 0.78rem; color: var(--color-text-muted);">Supports PNG, JPG, WEBP. Photo will be saved to assets/products/.</span>
+                <input type="text" id="prodImage" class="form-input" style="padding: 8px 12px; font-size: 0.85rem;" placeholder="assets/products/filename.png" required>
+              </div>
+            </div>
+
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-forest-dark);">Or choose from available pouch photos (मौजूदा फोटो में से चुनें):</span>
+              <div class="existing-thumbs-strip" id="existingThumbsStrip">
+                <!-- Dynamically populated from /api/list-images -->
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Category (फसल श्रेणी):</label>
+              <select id="prodCategory" class="form-select">
+                <option value="maize">Hybrid Maize (मक्का)</option>
+                <option value="paddy">Improved Paddy (धान)</option>
+                <option value="sorghum">Sorghum (ज्वार / चरी)</option>
+                <option value="vegetables">Vegetables (सब्जियां)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Badge Label:</label>
+              <input type="text" id="prodBadge" class="form-input" placeholder="e.g. Power Seal & Hologram">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Maturity Duration (दिन):</label>
+              <input type="text" id="prodMaturity" class="form-input" placeholder="e.g. 105 - 110 Days">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Packaging Size (पैकिंग):</label>
+              <input type="text" id="prodPackaging" class="form-input" placeholder="e.g. Official Sealed Pack">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description (विशेषताएं व विवरण):</label>
+            <textarea id="prodDesc" rows="3" class="form-textarea" placeholder="Product features..."></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Tagline (टैगलाइन):</label>
+              <input type="text" id="prodTagline" class="form-input" placeholder="e.g. Har Daane Mein Dum">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Security Feature (सुरक्षा चिह्न):</label>
+              <input type="text" id="prodSecurity" class="form-input" placeholder="e.g. Hologram & Power Seal">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Key Features, one per line (मुख्य विशेषताएं, हर लाइन में एक):</label>
+            <textarea id="prodFeatures" rows="4" class="form-textarea" placeholder="High yield&#10;Disease tolerant"></textarea>
+          </div>
+
+          <!-- Home page feature checkbox -->
+          <div style="background: #F4FAF3; border: 1px solid #C8E6C9; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 12px;">
+            <input type="checkbox" id="prodFeaturedOnHome" style="width: 20px; height: 20px; cursor: pointer;">
+            <label for="prodFeaturedOnHome" style="cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--color-forest-dark);">
+              Show this product on Home Page (इस बीज को होम पेज पर दिखाएं)
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 6px;">
+            <button type="button" id="cancelModalBtn" class="btn btn-outline-forest btn-sm">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= GALLERY MODAL (ADD / EDIT / CHANGE PHOTO) ================= -->
+    <div class="admin-modal-overlay" id="galleryModalOverlay">
+      <div class="admin-modal">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+          <h3 id="galleryModalTitle" style="margin: 0; color: var(--color-forest-dark);">Add New Gallery Photo</h3>
+          <button type="button" id="closeGalleryModalBtn" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #666; line-height: 1; padding: 4px;" aria-label="Close modal">&times;</button>
+        </div>
+
+        <form id="galleryForm" style="display: flex; flex-direction: column; gap: 16px;">
+          <input type="hidden" id="galleryEditId">
+
+          <!-- Photo Title -->
+          <div class="form-group">
+            <label class="form-label">Photo Title / Heading (फोटो का नाम व शीर्षक):</label>
+            <input type="text" id="galleryTitle" class="form-input" required placeholder="e.g. Medchal Central Seed Conditioning Plant">
+          </div>
+
+          <!-- Section / Category Selection -->
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Gallery Section / Category (गैलरी श्रेणी):</label>
+              <select id="galleryCategory" class="form-select">
+                <option value="farm">Farm & Trials (खेत व फसल प्रदर्शन)</option>
+                <option value="plant">Processing Plant (प्रोसेसिंग प्लांट व मशीनरी)</option>
+                <option value="warehouse">Warehouse & Logistics (गोदाम व वेयरहाउस)</option>
+                <option value="packaging">Packaging & Security (पैकिंग व सुरक्षा)</option>
+                <option value="custom">Custom Section (अन्य नया सेक्शन...)</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="galleryCustomCategoryGroup" style="display: none;">
+              <label class="form-label">Custom Section Name (नये सेक्शन का नाम):</label>
+              <input type="text" id="galleryCustomCategoryInput" class="form-input" placeholder="e.g. Research & Development">
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label">Description (विवरण व जानकारी):</label>
+            <textarea id="galleryDesc" rows="3" class="form-textarea" required placeholder="Describe what is shown in this photo (e.g. High precision seed cleaning line ensuring 99.8% mechanical purity...)"></textarea>
+          </div>
+
+          <!-- Photo Picker & Uploader -->
+          <div class="image-picker-box">
+            <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Photo / Image (फोटो चुनें या अपलोड करें):</span>
+              <span id="galleryUploadStatusBadge" style="font-size: 0.78rem; color: #166534; font-weight: 600; display: none;">Uploaded</span>
+            </label>
+
+            <div class="image-preview-row">
+              <img id="galleryModalImgPreview" src="assets/logo.png" alt="Preview" class="image-preview-thumb" style="width: 110px; height: 90px; object-fit: cover;">
+              <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                <input type="file" id="galleryImageFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;">
+                <button type="button" id="triggerGalleryUploadBtn" class="btn btn-forest btn-sm" style="padding: 9px 14px; font-size: 0.85rem; width: fit-content;">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+                  Upload Photo from Device (फोन / कंप्यूटर से फोटो अपलोड करें)
+                </button>
+                <span style="font-size: 0.78rem; color: var(--color-text-muted);">Supports JPG, PNG, WEBP. Photo will be saved to assets/gallery/.</span>
+                <input type="text" id="galleryImage" class="form-input" style="padding: 8px 12px; font-size: 0.85rem;" placeholder="assets/gallery/filename.jpg" required>
+              </div>
+            </div>
+
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-forest-dark);">Or choose from available website photos (मौजूदा फोटो में से चुनें):</span>
+              <div class="existing-thumbs-strip" id="existingGalleryThumbsStrip" style="height: 68px;">
+                <!-- Dynamically populated from /api/list-gallery-images -->
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 6px;">
+            <button type="button" id="cancelGalleryModalBtn" class="btn btn-outline-forest btn-sm">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm">Save Gallery Photo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin/main.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@ const tinyPngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42
 const tinyPng = Buffer.from(tinyPngBase64, 'base64');
 
 // Copy logo.svg content into an HTML/data format or keep svg
-const assetsDir = path.join(__dirname, '..', 'assets');
+const assetsDir = path.join(__dirname, '..', 'public', 'assets');
 if (!fs.existsSync(assetsDir)) {
   fs.mkdirSync(assetsDir, { recursive: true });
 }

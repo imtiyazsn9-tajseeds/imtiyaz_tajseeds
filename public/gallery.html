@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Interactive Photo Gallery | Taj Seeds Agri Sciences</title>
+  <meta name="description" content="Explore Taj Seeds Agri Sciences infrastructure, warehouse, processing plant, seed packaging, and field trials through our interactive 3D photo gallery.">
+  <meta name="keywords" content="Taj Seeds gallery, 3D gallery, seed plant photos, Medchal warehouse, seed packaging, hybrid maize fields">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="3D Interactive Photo Gallery | Taj Seeds Agri Sciences">
+  <meta property="og:description" content="A visual tour of our modern seed processing, warehouse, packaging, and demonstration fields.">
+  <meta property="og:image" content="assets/gallery/warehouse.svg">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <script src="js/layout.js" data-part="header"></script>
+
+  <!-- ================= PAGE BANNER ================= -->
+  <section class="page-banner gallery-hero-banner">
+    <div class="container page-banner-content">
+      <div class="page-breadcrumbs">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Gallery</span>
+      </div>
+      <h1 class="page-banner-title">3D Interactive Photo Gallery</h1>
+      <p class="page-banner-subtitle">
+        Hover over any photo card to feel the interactive 3D perspective and glare reflection. Click any card to expand full-screen lightbox.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY SECTION ================= -->
+  <section class="gallery-page-section">
+    <div class="container">
+      
+      <!-- ================= OFFICIAL PROMOTIONAL VIDEO SHOWCASE ================= -->
+      <div class="gallery-video-card reveal" style="background: #FFFFFF; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); box-shadow: var(--shadow-md); margin-bottom: 50px;">
+        <div style="display: grid; grid-template-columns: 1.35fr 1fr; align-items: center;">
+          <div style="position: relative; background: #000; min-height: 360px; display: flex; align-items: center; justify-content: center;">
+            <video id="tajPromoVideo" controls preload="metadata" poster="assets/products-hero-bg.jpg" style="width: 100%; height: 100%; max-height: 420px; object-fit: contain; display: block;">
+              <source src="assets/gallery/promo-video.mp4" type="video/mp4">
+              Your browser does not support HTML5 video tag.
+            </video>
+          </div>
+          <div style="padding: 40px 36px;">
+            <h3 style="font-size: 1.85rem; color: var(--color-forest-dark); margin-bottom: 14px; font-family: var(--font-heading); line-height: 1.3;">
+              Field Demonstration & Agronomic Excellence
+            </h3>
+            <p style="color: var(--color-text-muted); line-height: 1.75; font-size: 0.95rem; margin-bottom: 22px;">
+              Witness the power of authentic Taj Seeds in action across farmer fields. High germination vigor, uniform cob formation, and maximum grain yield potential backed by state-of-the-art conditioning.
+            </p>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <a href="products.html" class="btn btn-primary btn-sm">Explore Hybrid Seeds</a>
+              <a href="https://wa.me/919949003498" target="_blank" class="btn btn-forest btn-sm" style="background: #25D366; border-color: #25D366; display: inline-flex; align-items: center; gap: 6px;">
+                <svg style="width: 14px; height: 14px; fill: #fff;" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="gallery-filters reveal">
+        <button class="filter-tab-btn gallery-filter-btn is-active" data-category="all">All Photos</button>
+        <button class="filter-tab-btn gallery-filter-btn" data-category="farm">Farm & Trials</button>
+        <button class="filter-tab-btn gallery-filter-btn" data-category="plant">Processing Plant</button>
+        <button class="filter-tab-btn gallery-filter-btn" data-category="warehouse">Warehouse</button>
+        <button class="filter-tab-btn gallery-filter-btn" data-category="packaging">Packaging & Security</button>
+      </div>
+
+      <!-- Hint Strip for Users -->
+      <div style="text-align: center; margin-bottom: 30px; font-size: 0.85rem; color: var(--color-text-muted);" class="reveal">
+        <span style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; padding: 6px 18px; border-radius: 99px; border: 1px solid var(--color-border);">
+          <svg style="width: 14px; height: 14px; fill: var(--color-leaf-green);" viewBox="0 0 24 24"><path d="M13 14h-2v-4h2v4zm0 4h-2v-2h2v2zm-12 3h22L12 2 1 21z"/></svg>
+          Move cursor over cards for 3D tilt & glare &bull; Click to open high-res lightbox
+        </span>
+      </div>
+
+      <!-- 3D Tilt Cards Grid -->
+      <div class="gallery-grid-container" id="galleryGrid">
+        <!-- Injected via js/gallery.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= LIGHTBOX MODAL ================= -->
+  <div class="lightbox-modal" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Photo Preview">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
+      <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+        <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <button class="lightbox-nav-btn lightbox-next" id="lightboxNext" aria-label="Next image">
+        <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+
+      <div class="lightbox-image-wrap">
+        <img src="" id="lightboxImg" alt="Gallery Photo">
+      </div>
+
+      <div class="lightbox-details">
+        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+        <p class="lightbox-desc" id="lightboxDesc"></p>
+        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--color-text-light);">
+          Tip: You can use Keyboard Arrow Keys (&larr; / &rarr;) and ESC to navigate.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VISIT OUR FACILITY BANNER ================= -->
+  <section class="partner-cta-section reveal">
+    <div class="container">
+      <div class="partner-cta-card">
+        <div>
+          <h2 class="partner-cta-title">Visit Our Medchal Warehouse & Facility</h2>
+          <p class="partner-cta-desc">
+            We welcome progressive farmers, institutional partners, and seed dealers to inspect our seed grading technology and testing setups in Hyderabad.
+          </p>
+        </div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-primary btn-lg">Schedule a Facility Visit</a>
+          <a href="tel:+919949003498" class="btn btn-outline-white btn-lg">Call Logistics Desk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/layout.js" data-part="footer"></script>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
