@@ -9,7 +9,7 @@
     "build": "node scripts/build-image-manifest.js",
     "test": "node --test",
     "db:remote": "wrangler d1 migrations apply tajseeds --remote",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler d1 migrations apply DB --remote && wrangler deploy"
   },
   "engines": {
     "node": ">=20"

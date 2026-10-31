@@ -77,7 +77,7 @@ One-time setup:
 
 ```bash
 npx wrangler login
-npx wrangler d1 create tajseeds        # copy the printed database_id into wrangler.jsonc
+# create a D1 database named "tajseeds" in the dashboard and put its id in wrangler.jsonc
 npm run db:remote                      # creates the tables
 npx wrangler secret put ADMIN_PASSWORD # your admin password
 npx wrangler secret put SESSION_SECRET # any long random text

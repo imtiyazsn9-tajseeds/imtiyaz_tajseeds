@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tajseeds",
+  "name": "imtiyaz-tajseeds",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-30",
   "assets": {
@@ -15,7 +15,7 @@
     {
       "binding": "DB",
       "database_name": "tajseeds",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "b20a53d7-d5dc-4b8c-b203-6927ce0d6882",
       "migrations_dir": "migrations"
     }
   ],
