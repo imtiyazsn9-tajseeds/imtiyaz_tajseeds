@@ -31,5 +31,10 @@ route('POST', '/api/logout', async ({ request }) => {
 }, { public: true });
 
 route('GET', '/api/session', async ({ request, env }) => {
-  return sendJson(200, { success: true, authenticated: await auth.isAuthenticated(env, request) });
+  // `setup` only says whether the secrets reached the Worker (never their values), to help with first-time deploys
+  return sendJson(200, {
+    success: true,
+    authenticated: await auth.isAuthenticated(env, request),
+    setup: { adminPassword: Boolean(env.ADMIN_PASSWORD), sessionSecret: Boolean(env.SESSION_SECRET), database: Boolean(env.DB) }
+  });
 }, { public: true });
