@@ -3,6 +3,8 @@
   "name": "imtiyaz-tajseeds",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-30",
+  // Keep variables/secrets added in the Cloudflare dashboard when deploying
+  "keep_vars": true,
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
