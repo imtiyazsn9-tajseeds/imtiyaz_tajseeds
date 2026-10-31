@@ -5,7 +5,8 @@ import { $ } from './ui.js';
 export const state = {
   products: [],
   gallery: [],
-  config: {}
+  config: {},
+  versions: {} // fingerprints of the saved data we loaded, to detect other people's saves
 };
 
 let dirty = false;

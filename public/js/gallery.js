@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     galleryItems = await TajData.gallery();
   } catch (err) {
     console.error(err);
+    TajData.showError(galleryGrid, 'Gallery');
+    return;
   }
   let currentFilteredList = [...galleryItems];
   let currentLightboxIndex = 0;

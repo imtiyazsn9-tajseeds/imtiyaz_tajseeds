@@ -1,7 +1,7 @@
 /**
  * TAJ SEEDS AGRI SCIENCES
  * Contact Form Controller & Client-Side Validation
- * Official Recipient: tajseeds15@gmail.com
+ * Enquiries are sent to the server (POST /api/contact) and shown in the admin panel.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Form submission
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       let isFormValid = true;
@@ -132,20 +132,37 @@ document.addEventListener('DOMContentLoaded', () => {
         Sending Inquiry...
       `;
 
-      // Simulating / processing submission to tajseeds15@gmail.com
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
+      const data = new FormData(contactForm);
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.get('name'),
+            phone: data.get('phone'),
+            email: data.get('email'),
+            location: data.get('state_district'),
+            type: data.get('enquiry_type'),
+            message: data.get('message'),
+            website: data.get('website')
+          })
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok || !result.success) throw new Error(result.error || 'Server error');
 
         contactForm.reset();
-
         if (formSuccessBox) {
           formSuccessBox.style.display = 'block';
           formSuccessBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-
-        showToast('Thank you! Your enquiry has been routed to tajseeds15@gmail.com. Our team will contact you shortly.', 'success');
-      }, 1200);
+        showToast('Thank you! Your enquiry has been received. Our team will call you shortly.', 'success');
+      } catch (err) {
+        // Keep what the visitor typed, and give them another way to reach us
+        showToast(`${err.message} You can also call or WhatsApp us directly.`, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
     });
   }
 });

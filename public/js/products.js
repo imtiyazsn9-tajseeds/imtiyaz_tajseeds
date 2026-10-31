@@ -5,17 +5,31 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   const productsGrid = document.getElementById('productsGrid');
-  const filterTabs = document.querySelectorAll('.filter-tab-btn');
+  let filterTabs = [];
   const searchInput = document.getElementById('productSearch');
   const modal = document.getElementById('productModal');
   const modalContent = document.getElementById('productModalBody');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
 
   let TAJ_PRODUCTS = [];
+  let company = {};
   try {
-    TAJ_PRODUCTS = await TajData.products();
+    [TAJ_PRODUCTS, { company }] = await Promise.all([TajData.products(), TajData.config()]);
   } catch (err) {
     console.error(err);
+    TajData.showError(productsGrid, 'Products');
+    return;
+  }
+
+  // One tab per category that actually has products, so nothing is hidden behind "All"
+  const tabsBox = document.querySelector('.products-filter-tabs');
+  if (tabsBox) {
+    const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const categories = [...new Map(TAJ_PRODUCTS.map(p => [p.category, p.categoryLabel || p.category]))];
+    tabsBox.innerHTML = [['all', 'All Seeds (सभी बीज)'], ...categories].map(([key, label], i) =>
+      `<button class="filter-tab-btn ${i === 0 ? 'is-active' : ''}" data-category="${esc(key)}">${esc(label)}</button>`).join('');
+    filterTabs = tabsBox.querySelectorAll('.filter-tab-btn');
+    if (categories.length < 2) tabsBox.style.display = 'none';
   }
 
   let activeCategory = 'all';
@@ -175,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <a href="contact.html?product=${encodeURIComponent(product.name)}" class="btn btn-primary" style="flex: 1;">
               Book / Dealership Enquiry
             </a>
-            <a href="https://wa.me/919949003498?text=Hello%20Taj%20Seeds,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}" target="_blank" class="btn btn-forest" style="background-color: #25D366; border-color: #25D366; display: inline-flex; align-items: center; gap: 6px;">
+            <a href="${SiteConfig.whatsappUrl(company.whatsapp, `Hello Taj Seeds, I am interested in ${product.name}`)}" target="_blank" rel="noopener" class="btn btn-forest" style="background-color: #25D366; border-color: #25D366; display: inline-flex; align-items: center; gap: 6px;">
               <svg style="width: 16px; height: 16px; fill: #fff;" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
               WhatsApp
             </a>

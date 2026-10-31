@@ -32,3 +32,34 @@ export function setStatus(el, text, state) {
   el.style.color = colors[state] || colors.busy;
   el.textContent = text;
 }
+
+const MAX_SIDE = 1200;
+
+/**
+ * Shrinks a photo in the browser before upload: phone photos are often 4000px / 5 MB, far larger
+ * than the site ever shows. Returns { filename, data } ready for the server. SVG and GIF are sent as they are.
+ */
+export async function prepareImage(file) {
+  if (!/^image\/(png|jpe?g|webp)$/.test(file.type)) {
+    return { filename: file.name, data: await readFileAsDataUrl(file) };
+  }
+
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#FFFFFF'; // photos with transparency get a white background, like the product cards
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+
+  const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.82));
+  if (!blob || blob.type !== 'image/webp') {
+    return { filename: file.name, data: await readFileAsDataUrl(file) }; // browser cannot encode WebP
+  }
+  return {
+    filename: file.name.replace(/\.[^.]+$/, '') + '.webp',
+    data: await readFileAsDataUrl(blob)
+  };
+}

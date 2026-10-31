@@ -376,18 +376,36 @@ body {
 }
 .existing-thumbs-strip {
   display: flex;
+  flex-wrap: wrap;
+  max-height: 232px;
+  overflow-y: auto;
   gap: 8px;
-  overflow-x: auto;
   padding: 8px 4px;
   background: #FFFFFF;
   border-radius: 8px;
   border: 1px solid var(--admin-border);
   -webkit-overflow-scrolling: touch;
 }
+.thumb-wrap { position: relative; flex: 0 0 auto; }
+.thumb-delete {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #B91C1C;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+  padding: 0;
+}
 .existing-thumb-btn {
   flex: 0 0 auto;
-  width: 48px;
-  height: 58px;
+  width: 72px;
+  height: 88px;
   padding: 2px;
   border: 2px solid transparent;
   border-radius: 6px;
@@ -600,4 +618,97 @@ body {
   color: #FFFFFF;
   border-color: var(--color-leaf-green);
   box-shadow: 0 2px 8px rgba(46, 158, 68, 0.25);
+}
+
+/* Unread-enquiry count on the Enquiries tab */
+.tab-badge {
+  background: #D7262E;
+  color: #fff;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 8px;
+  margin-left: 4px;
+}
+
+/* Enquiry inbox */
+.enquiry-card {
+  border: 1px solid var(--admin-border);
+  border-left: 4px solid #D7262E;
+  border-radius: 10px;
+  padding: 16px 18px;
+  background: #fff;
+}
+.enquiry-card.is-handled {
+  border-left-color: var(--color-leaf-green);
+  background: #FAFCF8;
+}
+.enquiry-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.enquiry-meta {
+  font-size: 0.85rem;
+  color: #4B5563;
+  margin: 6px 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+.enquiry-message {
+  background: #F9FAF5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.enquiry-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.empty-state {
+  text-align: center;
+  padding: 40px 16px;
+  color: #6B7280;
+  border: 1px dashed var(--admin-border);
+  border-radius: 10px;
+}
+
+/* "How it will look on the website" preview inside the product form */
+.preview-box {
+  background: #F4FAF3;
+  border: 1px dashed #A5D6A7;
+  border-radius: 10px;
+  padding: 14px;
+}
+.preview-card {
+  display: flex;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 8px;
+}
+.preview-card img {
+  width: 84px;
+  height: 100px;
+  object-fit: contain;
+  background: #F5F9F1;
+  border-radius: 6px;
+}
+.preview-card .preview-badge {
+  display: inline-block;
+  background: var(--color-forest-deep);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 99px;
 }

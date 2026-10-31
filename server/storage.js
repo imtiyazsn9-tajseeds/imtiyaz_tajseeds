@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const config = require('./config');
+const { readJson, writeJson } = require('./jsonfile');
 
 /** Names of the JSON documents the admin panel is allowed to write. */
 const DOCUMENTS = {
@@ -16,13 +17,12 @@ function filePath(name) {
   return path.join(config.DATA_DIR, DOCUMENTS[name]);
 }
 
-/** Writes via a temp file + rename so a crash can never leave half-written JSON. */
-function writeJson(name, data) {
-  const target = filePath(name);
-  fs.mkdirSync(path.dirname(target), { recursive: true });
-  const tmp = `${target}.${process.pid}.tmp`;
-  fs.writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n', 'utf8');
-  fs.renameSync(tmp, target);
+function writeDocument(name, data) {
+  writeJson(filePath(name), data);
+}
+
+function readDocument(name) {
+  return readJson(filePath(name), null);
 }
 
 function listImages(folders) {
@@ -46,4 +46,24 @@ function saveImage(folder, filename, buffer) {
   return `assets/${folder}/${filename}`;
 }
 
-module.exports = { writeJson, listImages, saveImage, DOCUMENTS };
+/** Image paths currently used by a product or gallery photo. */
+function usedImagePaths() {
+  const used = new Set();
+  for (const doc of ['products', 'gallery']) {
+    for (const item of readDocument(doc) || []) used.add(item.image);
+  }
+  return used;
+}
+
+/** Deletes an uploaded image. Returns false if it does not exist; throws if it is still in use. */
+function deleteImage(imagePath) {
+  const match = /^assets\/(products|gallery)\/([^/\\]+)$/.exec(imagePath);
+  if (!match || match[2].startsWith('.')) return false;
+  if (usedImagePaths().has(imagePath)) throw new Error('IN_USE');
+  const file = path.join(config.PUBLIC_DIR, imagePath);
+  if (!fs.existsSync(file)) return false;
+  fs.unlinkSync(file);
+  return true;
+}
+
+module.exports = { usedImagePaths, deleteImage, writeDocument, readDocument, filePath, listImages, saveImage, DOCUMENTS };

@@ -13,6 +13,7 @@ fs.mkdirSync(path.join(tmp, 'assets', 'products'), { recursive: true });
 fs.writeFileSync(path.join(tmp, 'index.html'), '<h1>home</h1>');
 fs.writeFileSync(path.join(tmp, '.secret'), 'hidden');
 process.env.PUBLIC_DIR = tmp;
+process.env.PRIVATE_DIR = path.join(tmp, '..', path.basename(tmp) + '-private');
 process.env.ADMIN_ID = 'tajseeds';
 process.env.ADMIN_PASSWORD = 'test-password';
 
@@ -35,6 +36,7 @@ test.before(async () => {
 test.after(() => {
   server.close();
   fs.rmSync(tmp, { recursive: true, force: true });
+  fs.rmSync(process.env.PRIVATE_DIR, { recursive: true, force: true });
 });
 
 const json = (method, url, body, withCookie = true) => fetch(base + url, {
@@ -108,6 +110,73 @@ test('image upload checks type, signature and content', async () => {
 test('JSON endpoints reject other content types', async () => {
   const res = await fetch(`${base}/api/content`, { method: 'PUT', headers: { 'Content-Type': 'text/plain', Cookie: cookie }, body: '{}' });
   assert.strictEqual(res.status, 415);
+});
+
+
+test('saving keeps a backup of the previous version and can restore it', async () => {
+  const v1 = { ...PRODUCT, name: 'Version Two' };
+  assert.strictEqual((await json('PUT', '/api/content', { products: [v1] })).status, 200);
+
+  const list = await (await json('GET', '/api/backups')).json();
+  assert.ok(list.backups.length >= 1);
+  const backup = list.backups.find(b => b.doc === 'products');
+  assert.match(backup.summary, /1 products/);
+
+  assert.strictEqual((await json('POST', '/api/backups/restore', { file: '../../etc/passwd' })).status, 404);
+  assert.strictEqual((await json('POST', '/api/backups/restore', { file: backup.file })).status, 200);
+  assert.strictEqual(JSON.parse(fs.readFileSync(path.join(tmp, 'data', 'products.json'), 'utf8'))[0].name, 'P1');
+});
+
+test('saving over someone else\'s newer save is refused', async () => {
+  const { versions } = await (await json('GET', '/api/versions')).json();
+  assert.strictEqual((await json('PUT', '/api/content', { products: [{ ...PRODUCT, name: 'Changed' }], base: versions })).status, 200);
+  // `versions` is now out of date, as if another admin had saved in the meantime
+  const stale = await json('PUT', '/api/content', { products: [{ ...PRODUCT, name: 'Overwrite' }], base: versions });
+  assert.strictEqual(stale.status, 409);
+});
+
+test('images in use cannot be deleted, unused ones can', async () => {
+  const up = await (await json('POST', '/api/upload-image', { filename: 'spare.png', data: asDataUrl(PNG, 'image/png') })).json();
+  const list = await (await json('GET', '/api/images?scope=products')).json();
+  assert.strictEqual(list.images.find(i => i.path === up.imagePath).inUse, false);
+
+  assert.strictEqual((await json('POST', '/api/images/delete', { path: up.imagePath })).status, 200);
+  assert.ok(!fs.existsSync(path.join(tmp, up.imagePath)));
+  assert.strictEqual((await json('POST', '/api/images/delete', { path: '../index.html' })).status, 404);
+
+  fs.writeFileSync(path.join(tmp, 'assets', 'products', 'p1.png'), PNG);
+  assert.strictEqual((await json('POST', '/api/images/delete', { path: 'assets/products/p1.png' })).status, 409);
+});
+
+test('contact form saves enquiries for the admin and blocks bad input', async () => {
+  const enquiry = { name: 'Ramesh Patel', phone: '98765 43210', location: 'Medchal', type: 'Dealership', message: 'Need dealership details please' };
+  const post = body => json('POST', '/api/contact', body, false);
+
+  assert.strictEqual((await post({ ...enquiry, phone: '12345' })).status, 400);
+  assert.strictEqual((await post({ ...enquiry, message: 'short' })).status, 400);
+  assert.strictEqual((await post({ ...enquiry, email: 'not-an-email' })).status, 400);
+
+  assert.strictEqual((await post({ ...enquiry, website: 'http://spam' })).status, 200, 'bots are told it worked');
+  assert.strictEqual((await post(enquiry)).status, 200);
+
+  // Visitors cannot read the inbox, the admin can
+  assert.strictEqual((await json('GET', '/api/enquiries', undefined, false)).status, 401);
+  assert.strictEqual((await fetch(`${base}/enquiries.json`)).status, 404);
+  const { enquiries } = await (await json('GET', '/api/enquiries')).json();
+  assert.strictEqual(enquiries.length, 1, 'spam trap entry is not stored');
+  assert.strictEqual(enquiries[0].name, 'Ramesh Patel');
+  assert.strictEqual(enquiries[0].status, 'new');
+
+  assert.strictEqual((await json('POST', '/api/enquiries/status', { id: enquiries[0].id, status: 'handled' })).status, 200);
+  assert.strictEqual((await (await json('GET', '/api/enquiries')).json()).enquiries[0].status, 'handled');
+  assert.strictEqual((await json('POST', '/api/enquiries/delete', { id: enquiries[0].id })).status, 200);
+});
+
+test('contact form is rate limited per visitor', async () => {
+  const enquiry = { name: 'Spam Bot', phone: '9876543210', message: 'Buy cheap things now' };
+  let last;
+  for (let i = 0; i < 6; i++) last = await json('POST', '/api/contact', enquiry, false);
+  assert.strictEqual(last.status, 429);
 });
 
 test('logout ends the session', async () => {

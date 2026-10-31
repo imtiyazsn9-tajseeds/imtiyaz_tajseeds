@@ -16,6 +16,20 @@ const ICON_DELETE = '<svg class="icon-svg" style="width: 12px; height: 12px; fil
 
 let picker;
 
+/** Mini version of the website's product card, refreshed while the form is edited. */
+function updatePreview() {
+  const val = id => $(id).value.trim();
+  $('productPreview').innerHTML = `
+    <img src="${escapeHtml(imgSrc(val('prodImage')) || FALLBACK_IMAGE)}" alt="" data-fallback>
+    <div style="min-width: 0;">
+      <span class="preview-badge">${escapeHtml(val('prodBadge') || 'Authentic Hybrid')}</span>
+      <h4 style="margin: 6px 0 0; color: var(--color-forest-dark);">${escapeHtml(val('prodName') || 'Product name')}</h4>
+      <div style="font-size: 0.82rem; color: var(--color-leaf-green); font-weight: 600;">${escapeHtml(val('prodHindiName'))}</div>
+      <p style="margin: 4px 0; font-size: 0.8rem; color: #4B5563;">${escapeHtml(val('prodDesc').slice(0, 110))}${val('prodDesc').length > 110 ? '…' : ''}</p>
+      <div style="font-size: 0.78rem; color: #374151;">Maturity: ${escapeHtml(val('prodMaturity') || '-')} &nbsp;·&nbsp; Pack: ${escapeHtml(val('prodPackaging') || 'Official Sealed Pack')}</div>
+    </div>`;
+}
+
 function productImg(p, cls) {
   return `<img src="${escapeHtml(imgSrc(p.image))}" alt="${escapeHtml(p.name)}" class="${cls}" data-fallback>`;
 }
@@ -108,6 +122,7 @@ function openProductModal(index = null) {
     picker.setPath('');
     $('modalImgPreview').src = FALLBACK_IMAGE;
   }
+  updatePreview();
   openModal(overlay());
 }
 
@@ -220,4 +235,6 @@ export function initProducts() {
   $('closeModalBtn').addEventListener('click', () => closeModal(overlay()));
   $('cancelModalBtn').addEventListener('click', () => closeModal(overlay()));
   form().addEventListener('submit', submitProduct);
+  form().addEventListener('input', updatePreview);
+  form().addEventListener('picker:change', updatePreview);
 }

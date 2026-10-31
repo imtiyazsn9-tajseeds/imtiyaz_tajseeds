@@ -115,6 +115,14 @@
           <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
           Photos & Gallery (गैलरी)
         </button>
+        <button class="admin-tab-btn" data-tab="tab-enquiries">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Enquiries (पूछताछ) <span id="enquiryBadge" class="tab-badge" style="display: none;"></span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tab-backups">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+          Backups (पुराने वर्ज़न)
+        </button>
         <button class="admin-tab-btn" data-tab="tab-guide">
           <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
           Simple Guide (गाइड)
@@ -203,15 +211,15 @@
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Phone Number 1 (मुख्य फोन):</label>
-              <input type="text" id="cfgPhone1" class="form-input" value="+91 9949003498">
+              <input type="text" id="cfgPhone1" class="form-input" placeholder="e.g. +91 98765 43210">
             </div>
             <div class="form-group">
               <label class="form-label">Phone Number 2 (दूसरा फोन):</label>
-              <input type="text" id="cfgPhone2" class="form-input" value="+91 9113409962">
+              <input type="text" id="cfgPhone2" class="form-input" placeholder="e.g. +91 98765 43210">
             </div>
             <div class="form-group">
-              <label class="form-label">WhatsApp Number (बिना + या स्पेस के, e.g. 919949003498):</label>
-              <input type="text" id="cfgWhatsapp" class="form-input" value="919949003498">
+              <label class="form-label">WhatsApp Number (बिना + या स्पेस के, e.g. 919876543210):</label>
+              <input type="text" id="cfgWhatsapp" class="form-input" placeholder="e.g. 919876543210">
             </div>
             <div class="form-group">
               <label class="form-label">Email Address (ईमेल):</label>
@@ -304,6 +312,24 @@
         </div>
       </div>
 
+      <!-- ================= TAB: ENQUIRIES INBOX ================= -->
+      <div class="tab-content" id="tab-enquiries">
+        <div class="admin-card">
+          <h3 class="card-title">Customer Enquiries (ग्राहकों की पूछताछ)</h3>
+          <p class="card-subtitle">Website ke Contact form se aayi saari enquiries yahan aati hain. Call ya WhatsApp karke unhe jawab dein.</p>
+          <div id="enquiryList" style="display: flex; flex-direction: column; gap: 14px; margin-top: 18px;"></div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: BACKUPS ================= -->
+      <div class="tab-content" id="tab-backups">
+        <div class="admin-card">
+          <h3 class="card-title">Backups (पुराने वर्ज़न वापस लाएं)</h3>
+          <p class="card-subtitle">Har baar "Save Changes" dabane se pehle purana data apne aap yahan save ho jaata hai. Galti ho jaye to kisi bhi purane version par wapas ja sakte hain.</p>
+          <div id="backupList" style="margin-top: 18px;"></div>
+        </div>
+      </div>
+
       <!-- ================= TAB 5: SIMPLE GUIDE ================= -->
       <div class="tab-content" id="tab-guide">
         <div class="admin-card">
@@ -313,9 +339,7 @@
           </h3>
           <div style="line-height: 1.8; color: #374151; font-size: 0.95rem;">
             <h4 style="color: var(--color-forest-dark); margin-top: 16px;">1. Login ID & Password:</h4>
-            <p>Admin Portal ka login credentials hai:<br>
-            - <strong>Admin ID:</strong> <code>taj seeds</code><br>
-            - <strong>Password:</strong> <code>0099</code></p>
+            <p>Admin ID aur Password server par set hote hain (<code>ADMIN_ID</code> aur <code>ADMIN_PASSWORD</code>). Password badalne ke liye server chalate waqt naya <code>ADMIN_PASSWORD</code> dein. Password kisi ke saath share na karein.</p>
 
             <h4 style="color: var(--color-forest-dark); margin-top: 16px;">2. Website Par Admin Login Kahan Hai?</h4>
             <p>Admin Login ab website par 3 aasan jagahon par uplabdh hai:<br>
@@ -438,6 +462,12 @@
           <div class="form-group">
             <label class="form-label">Key Features, one per line (मुख्य विशेषताएं, हर लाइन में एक):</label>
             <textarea id="prodFeatures" rows="4" class="form-textarea" placeholder="High yield&#10;Disease tolerant"></textarea>
+          </div>
+
+          <!-- Live preview -->
+          <div class="preview-box">
+            <span style="font-size: 0.8rem; font-weight: 600; color: var(--color-forest-dark);">Website par aisa dikhega (preview):</span>
+            <div class="preview-card" id="productPreview"></div>
           </div>
 
           <!-- Home page feature checkbox -->

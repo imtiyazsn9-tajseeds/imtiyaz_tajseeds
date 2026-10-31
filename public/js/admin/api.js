@@ -59,10 +59,25 @@ export const api = {
     ]);
     return { products, gallery, config };
   },
+  async versions() {
+    return (await request('GET', '/api/versions')).versions;
+  },
   saveContent: payload => request('PUT', '/api/content', payload),
+
+  async listEnquiries() {
+    return (await request('GET', '/api/enquiries')).enquiries;
+  },
+  setEnquiryStatus: (id, status) => request('POST', '/api/enquiries/status', { id, status }),
+  deleteEnquiry: id => request('POST', '/api/enquiries/delete', { id }),
+
+  async listBackups() {
+    return (await request('GET', '/api/backups')).backups;
+  },
+  restoreBackup: file => request('POST', '/api/backups/restore', { file }),
 
   async listImages(scope) {
     return (await request('GET', `/api/images?scope=${encodeURIComponent(scope)}`)).images;
   },
+  deleteImage: path => request('POST', '/api/images/delete', { path }),
   uploadImage: ({ filename, data, folder }) => request('POST', '/api/upload-image', { filename, data, folder })
 };

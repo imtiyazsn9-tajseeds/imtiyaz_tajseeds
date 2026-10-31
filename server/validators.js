@@ -46,4 +46,33 @@ function validateConfig(cfg) {
   return null;
 }
 
-module.exports = { validateProducts, validateGallery, validateConfig };
+const ENQUIRY_TYPES = ['Product Enquiry', 'Dealership', 'Bulk Order', 'Agronomic Advisory', 'Other'];
+
+/** Returns { error } or { value } with the cleaned-up enquiry fields. */
+function parseEnquiry(body) {
+  if (!isObject(body)) return { error: 'Invalid request' };
+  const text = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
+
+  const name = text(body.name, 100);
+  const phone = text(body.phone, 20).replace(/[\s\-()]/g, '');
+  const email = text(body.email, 150);
+  const message = text(body.message, 2000);
+
+  if (name.length < 2) return { error: 'Please enter your full name.' };
+  if (!/^(\+91|91|0)?[6-9]\d{9}$/.test(phone)) return { error: 'Please enter a valid 10-digit mobile number.' };
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'Please enter a valid email address.' };
+  if (message.length < 8) return { error: 'Please provide a little more detail (min 8 characters).' };
+
+  return {
+    value: {
+      name,
+      phone,
+      email,
+      location: text(body.location, 150),
+      type: ENQUIRY_TYPES.includes(body.type) ? body.type : 'Other',
+      message
+    }
+  };
+}
+
+module.exports = { validateProducts, validateGallery, validateConfig, parseEnquiry };

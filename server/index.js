@@ -8,6 +8,8 @@ const { serveStatic } = require('./static');
 require('./routes/session');
 require('./routes/images');
 require('./routes/content');
+require('./routes/contact');
+require('./routes/backups');
 
 function createServer() {
   return http.createServer(async (req, res) => {

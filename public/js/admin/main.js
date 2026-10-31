@@ -8,16 +8,22 @@ import { initTabs } from './tabs.js';
 import { initProducts } from './products.js';
 import { initGallery } from './gallery.js';
 import { initSettings, collectConfig } from './settings.js';
+import { initEnquiries } from './enquiries.js';
+import { initBackups } from './backups.js';
 
 let dashboardReady = false;
 
 async function startDashboard() {
   if (!dashboardReady) {
+    // Versions first: if someone saves in between, our save is refused instead of overwriting theirs
+    state.versions = await api.versions();
     Object.assign(state, await api.loadContent());
     initTabs();
     initProducts();
     initGallery();
     initSettings();
+    initEnquiries();
+    initBackups();
     $('saveAllBtn').addEventListener('click', saveAll);
     document.querySelectorAll('.save-trigger-btn').forEach(btn => btn.addEventListener('click', saveAll));
     dashboardReady = true;
@@ -28,7 +34,8 @@ async function startDashboard() {
 async function saveAll() {
   try {
     const config = collectConfig();
-    await api.saveContent({ products: state.products, gallery: state.gallery, config });
+    const result = await api.saveContent({ products: state.products, gallery: state.gallery, config, base: state.versions });
+    state.versions = result.versions;
     state.config = config;
     clearUnsaved();
 

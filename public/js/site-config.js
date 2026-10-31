@@ -1,8 +1,32 @@
 /**
  * TAJ SEEDS AGRI SCIENCES (PVT. LTD.)
- * Fills contact details (phone, email, address, tagline, WhatsApp link) into
- * any element marked with data-bind="...", using data/site-config.json.
+ * Fills contact details into the page from data/site-config.json (edited in the admin panel),
+ * so every phone number, WhatsApp link, email and address on the site always agrees.
+ *
+ * Mark elements with data-bind:
+ *   phone1 / phone2            text + tel: link (a <span>/<strong> only gets the text)
+ *   phone1-link / phone2-link  tel: link only, keeps the element's own label
+ *   whatsapp                   wa.me link; optional data-wa-text="pre-filled message"
+ *   email, address, tagline    text (and mailto: for links)
+ *   data-prefix="Call "        text placed before the bound text
  */
+
+const SiteConfig = {
+  /** 10-digit Indian numbers get the +91 country code; anything else is used as typed. */
+  displayPhone(value) {
+    const v = String(value || '').trim();
+    return /^\d{10}$/.test(v) ? `+91 ${v}` : v;
+  },
+  telHref(value) {
+    const digits = String(value || '').replace(/[^0-9+]/g, '');
+    return `tel:${/^\d{10}$/.test(digits) ? '+91' + digits : digits}`;
+  },
+  whatsappUrl(number, text) {
+    const digits = String(number || '').replace(/[^0-9]/g, '');
+    const full = digits.length === 10 ? `91${digits}` : digits;
+    return `https://wa.me/${full}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+  }
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
   let company;
@@ -13,31 +37,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     return; // The static text already in the page is used instead
   }
 
-  document.querySelectorAll('[data-bind="phone1"]').forEach(el => {
-    el.textContent = company.phone1;
-    if (el.tagName === 'A') el.href = `tel:${company.phone1Raw}`;
+  const bind = (name, apply) => document.querySelectorAll(`[data-bind="${name}"]`).forEach(apply);
+  const withPrefix = (el, text) => (el.dataset.prefix || '') + text;
+
+  for (const key of ['phone1', 'phone2']) {
+    const number = company[key];
+    bind(key, el => {
+      el.textContent = withPrefix(el, SiteConfig.displayPhone(number));
+      if (el.tagName === 'A') el.href = SiteConfig.telHref(number);
+    });
+    bind(`${key}-link`, el => { el.href = SiteConfig.telHref(number); });
+  }
+
+  bind('whatsapp', el => {
+    el.href = SiteConfig.whatsappUrl(company.whatsapp, el.dataset.waText || company.whatsappMessage);
   });
 
-  document.querySelectorAll('[data-bind="phone2"]').forEach(el => {
-    el.textContent = company.phone2;
-    if (el.tagName === 'A') el.href = `tel:${company.phone2Raw}`;
-  });
-
-  document.querySelectorAll('[data-bind="email"]').forEach(el => {
+  bind('email', el => {
     el.textContent = company.email;
     if (el.tagName === 'A') el.href = `mailto:${company.email}`;
   });
 
-  document.querySelectorAll('[data-bind="address"]').forEach(el => {
-    el.textContent = company.address.full;
-  });
-
-  document.querySelectorAll('[data-bind="tagline"]').forEach(el => {
-    el.textContent = `"${company.tagline}"`;
-  });
-
-  const floatingWa = document.querySelector('.floating-whatsapp');
-  if (floatingWa) {
-    floatingWa.href = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(company.whatsappMessage)}`;
-  }
+  bind('address', el => { el.textContent = company.address.full; });
+  bind('tagline', el => { el.textContent = `"${company.tagline}"`; });
 });

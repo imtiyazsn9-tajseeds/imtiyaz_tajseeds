@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     TAJ_PRODUCTS = await TajData.products();
   } catch (err) {
     console.error(err);
-    container.innerHTML = '<p style="text-align:center;grid-column:1/-1;">Products could not be loaded. Please refresh the page.</p>';
+    TajData.showError(container, 'Products');
     return;
   }
 

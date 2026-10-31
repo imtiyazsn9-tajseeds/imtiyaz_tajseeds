@@ -16,6 +16,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages.css">
+  <script src="js/data.js"></script>
 </head>
 <body>
 
@@ -56,14 +57,14 @@
 
       <!-- Dynamic Grid of Products -->
       <div class="products-grid" id="productsGrid">
-        <!-- Rendered via js/products.js -->
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
       </div>
 
       <!-- ================= GENUINE SEED VERIFICATION SECTION ================= -->
       <div class="genuine-seeds-showcase reveal" style="margin-top: 70px; background: #FFFFFF; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); box-shadow: var(--shadow-md);">
         <div style="display: grid; grid-template-columns: 1fr 1.25fr; align-items: center;">
           <div style="background: linear-gradient(180deg, #F9FAF5 0%, #EEF5E8 100%); padding: 32px; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--color-border);">
-            <img src="assets/products/KING-7244-security.png" alt="Identify Genuine Taj Seeds - Hologram & Power Seal" style="max-height: 400px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.15)); border-radius: 8px;">
+            <img src="assets/products/KING-7244-security.webp" alt="Identify Genuine Taj Seeds - Hologram & Power Seal" style="max-height: 400px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.15)); border-radius: 8px;">
           </div>
           <div style="padding: 40px 36px;">
             <h3 style="font-size: 2rem; color: var(--color-forest-dark); margin-bottom: 12px; font-family: var(--font-heading); line-height: 1.25;">
@@ -95,7 +96,7 @@
                 </div>
               </div>
             </div>
-            <a href="https://wa.me/919949003498?text=Hello%20Taj%20Seeds,%20I%20want%20to%20verify%20my%20seed%20bag%20authenticity." target="_blank" class="btn btn-primary btn-sm">
+            <a href="https://wa.me/919263714728?text=Hello%20Taj%20Seeds,%20I%20want%20to%20verify%20my%20seed%20bag%20authenticity." data-bind="whatsapp" data-wa-text="Hello Taj Seeds, I want to verify my seed bag authenticity." target="_blank" class="btn btn-primary btn-sm">
               Verify Seed Lot on WhatsApp &rarr;
             </a>
           </div>
@@ -156,7 +157,7 @@
         </div>
         <div style="display: flex; gap: 16px; flex-wrap: wrap;">
           <a href="contact.html?type=Dealership" class="btn btn-primary btn-lg">Apply as Dealer</a>
-          <a href="tel:+919949003498" class="btn btn-outline-white btn-lg">Call Sales Desk</a>
+          <a href="tel:+919263714728" data-bind="phone1-link" class="btn btn-outline-white btn-lg">Call Sales Desk</a>
         </div>
       </div>
     </div>
@@ -165,7 +166,6 @@
   <script src="js/layout.js" data-part="footer"></script>
 
   <!-- Scripts -->
-  <script src="js/data.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>

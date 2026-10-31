@@ -2,11 +2,12 @@
 
 const crypto = require('crypto');
 const config = require('./config');
-const { parseCookies, isHttps } = require('./http');
+const { parseCookies, isHttps, clientIp } = require('./http');
+const { createLimiter } = require('./ratelimit');
 
 const COOKIE_NAME = 'taj_admin';
 const sessions = new Map(); // token -> expiry timestamp
-const attempts = new Map(); // ip -> { count, resetAt }
+const loginLimiter = createLimiter({ max: config.LOGIN_MAX_ATTEMPTS, windowMs: config.LOGIN_WINDOW_MS });
 
 /** Compares two strings without leaking their length or content through timing. */
 function safeEqual(a, b) {
@@ -24,34 +25,10 @@ function verifyCredentials(id, password) {
   return idOk && passOk;
 }
 
-function clientIp(req) {
-  if (config.TRUST_PROXY) {
-    const forwarded = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
-    if (forwarded) return forwarded;
-  }
-  return req.socket.remoteAddress || 'unknown';
-}
-
 /** Returns how many ms the caller must wait, or 0 if another attempt is allowed. */
-function loginBlockedFor(req) {
-  const entry = attempts.get(clientIp(req));
-  if (!entry || entry.resetAt <= Date.now()) return 0;
-  return entry.count >= config.LOGIN_MAX_ATTEMPTS ? entry.resetAt - Date.now() : 0;
-}
-
-function recordFailedLogin(req) {
-  const ip = clientIp(req);
-  const entry = attempts.get(ip);
-  if (!entry || entry.resetAt <= Date.now()) {
-    attempts.set(ip, { count: 1, resetAt: Date.now() + config.LOGIN_WINDOW_MS });
-  } else {
-    entry.count += 1;
-  }
-}
-
-function clearFailedLogins(req) {
-  attempts.delete(clientIp(req));
-}
+const loginBlockedFor = req => loginLimiter.check(clientIp(req));
+const recordFailedLogin = req => loginLimiter.hit(clientIp(req));
+const clearFailedLogins = req => loginLimiter.reset(clientIp(req));
 
 function createSession() {
   const token = crypto.randomBytes(32).toString('hex');

@@ -4,7 +4,8 @@
  */
 
 import { api } from './api.js';
-import { $, escapeHtml, imgSrc, readFileAsDataUrl, setStatus, FALLBACK_IMAGE } from './ui.js';
+import { state } from './state.js';
+import { $, escapeHtml, imgSrc, prepareImage, setStatus, FALLBACK_IMAGE } from './ui.js';
 
 export function createImagePicker({ scope, folder, ids }) {
   const pathInput = $(ids.path);
@@ -16,17 +17,25 @@ export function createImagePicker({ scope, folder, ids }) {
   let images = [];
   let uploading = false;
 
+  // A photo is "in use" if the saved site, or an edit that is not saved yet, still points at it
+  const isInUse = img => img.inUse || pathInput.value === img.path ||
+    state.products.some(p => p.image === img.path) || state.gallery.some(g => g.image === img.path);
+
   function renderStrip() {
     strip.innerHTML = images.map((img, i) => `
-      <button type="button" class="existing-thumb-btn ${img.path === pathInput.value ? 'is-selected' : ''}" data-index="${i}" title="${escapeHtml(img.filename)}">
-        <img src="${escapeHtml(imgSrc(img.path))}" alt="${escapeHtml(img.filename)}">
-      </button>`).join('');
+      <div class="thumb-wrap">
+        <button type="button" class="existing-thumb-btn ${img.path === pathInput.value ? 'is-selected' : ''}" data-index="${i}" title="${escapeHtml(img.filename)}">
+          <img src="${escapeHtml(imgSrc(img.path))}" alt="${escapeHtml(img.filename)}" loading="lazy">
+        </button>
+        ${isInUse(img) ? '' : `<button type="button" class="thumb-delete" data-delete="${i}" title="Ye photo kahin use nahi ho rahi - delete karein" aria-label="Delete unused photo">&times;</button>`}
+      </div>`).join('');
   }
 
   function setPath(path) {
     pathInput.value = path;
     preview.src = imgSrc(path);
     renderStrip();
+    pathInput.dispatchEvent(new CustomEvent('picker:change', { bubbles: true }));
   }
 
   async function refresh() {
@@ -38,12 +47,29 @@ export function createImagePicker({ scope, folder, ids }) {
     renderStrip();
   }
 
-  strip.addEventListener('click', e => {
+  strip.addEventListener('click', async e => {
+    const del = e.target.closest('[data-delete]');
+    if (del) {
+      const img = images[Number(del.dataset.delete)];
+      if (!confirm(`"${img.filename}" photo hamesha ke liye delete karein?`)) return;
+      try {
+        await api.deleteImage(img.path);
+        if (pathInput.value === img.path) setPath('');
+        await refresh();
+      } catch (err) {
+        alert(err.message);
+      }
+      return;
+    }
     const btn = e.target.closest('.existing-thumb-btn');
     if (btn) setPath(images[Number(btn.dataset.index)].path);
   });
 
-  pathInput.addEventListener('input', () => { preview.src = imgSrc(pathInput.value); });
+  pathInput.addEventListener('input', () => {
+    preview.src = imgSrc(pathInput.value);
+    renderStrip();
+    pathInput.dispatchEvent(new CustomEvent('picker:change', { bubbles: true }));
+  });
 
   preview.addEventListener('error', () => {
     if (!preview.src.endsWith(FALLBACK_IMAGE)) preview.src = FALLBACK_IMAGE;
@@ -58,9 +84,9 @@ export function createImagePicker({ scope, folder, ids }) {
     uploading = true;
     setStatus(badge, 'Uploading...', 'busy');
     try {
-      const data = await readFileAsDataUrl(file);
+      const { filename, data } = await prepareImage(file);
       preview.src = data;
-      const result = await api.uploadImage({ filename: file.name, data, folder });
+      const result = await api.uploadImage({ filename, data, folder });
       setPath(result.imagePath);
       setStatus(badge, 'Uploaded successfully!', 'ok');
       await refresh();

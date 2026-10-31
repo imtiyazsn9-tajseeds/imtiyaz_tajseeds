@@ -20,6 +20,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages.css">
+  <script src="js/data.js"></script>
 </head>
 <body>
 
@@ -267,7 +268,7 @@
       </div>
 
       <div class="products-grid" id="homeFeaturedProductsGrid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-        <p style="grid-column: 1 / -1; text-align: center;">Loading seeds...</p>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div><div class="skeleton-card" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
       </div>
 
       <div style="text-align: center; margin-top: 50px;">
@@ -371,7 +372,6 @@
   <script src="js/layout.js" data-part="footer"></script>
 
   <!-- Scripts -->
-  <script src="js/data.js"></script>
   <script src="js/site-config.js"></script>
   <script src="js/home-products.js"></script>
   <script src="js/main.js"></script>

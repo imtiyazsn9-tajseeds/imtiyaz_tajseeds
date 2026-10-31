@@ -49,6 +49,7 @@ imtiyaz_tajseeds/
 │   │   └── admin/           # Admin panel modules (api, auth, products, gallery, settings, ...)
 │   └── assets/              # logo, favicon, products/, gallery/, ...
 │
+├── storage/                 # (created at runtime, git-ignored) enquiries.json and backups/
 ├── tests/server.test.js     # Automated checks for login, uploads, saving, file serving
 ├── scripts/                 # One-off import helpers
 ├── docs/                    # Editing guide
@@ -76,6 +77,8 @@ Settings come from environment variables (see `.env.example`):
 | `ADMIN_ID` | `tajseeds` | Admin login ID (spaces/case are ignored, so "Taj Seeds" works) |
 | `ADMIN_PASSWORD` | `0099` | Admin password. **Set your own before going online.** |
 | `TRUST_PROXY` | `0` | Set to `1` behind nginx/Cloudflare |
+| `NOTIFY_WEBHOOK_URL` | (empty) | Optional. Every new enquiry is also POSTed here as JSON (Formspree, Zapier, Make, ...) |
+| `PRIVATE_DIR` | `./storage` | Enquiries and backups. Never served to browsers. |
 
 Example: `ADMIN_PASSWORD=my-secret npm start`
 
@@ -91,7 +94,10 @@ receives a secure session cookie. After 5 wrong passwords a visitor is locked ou
 
 - **Home Page Seeds / All Seeds Catalog:** add, edit, delete products, upload photos, choose which seeds show on the home page.
 - **Gallery Photos:** add, edit, delete gallery photos and sections.
-- **Contact & Info:** phone numbers, email, address, tagline, WhatsApp number.
+- **Contact & Info:** phone numbers, email, address, tagline, WhatsApp number. These are used for every call/WhatsApp link on the site.
+- **Enquiries:** messages sent through the website's contact form (with Call / WhatsApp buttons and a New/Handled mark).
+- **Backups:** every save keeps the previous version; restore any of them with one click.
+- Photos are shrunk to 1200px WebP before upload; unused photos can be deleted from the photo picker.
 - Changes are applied on the page first. Click **Save Changes** to publish them to the website.
 
 ---

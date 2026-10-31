@@ -8,6 +8,7 @@ export function initTabs() {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('is-active'));
       btn.classList.add('is-active');
       document.getElementById(btn.dataset.tab).classList.add('is-active');
+      document.dispatchEvent(new CustomEvent('admin:tab', { detail: btn.dataset.tab }));
     });
   });
 }

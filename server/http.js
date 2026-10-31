@@ -1,5 +1,7 @@
 'use strict';
 
+const config = require('./config');
+
 /** Small helpers shared by routes: responses, body parsing, cookies. */
 
 class HttpError extends Error {
@@ -64,10 +66,18 @@ function isHttps(req) {
   return Boolean(req.socket.encrypted) || req.headers['x-forwarded-proto'] === 'https';
 }
 
+function clientIp(req) {
+  if (config.TRUST_PROXY) {
+    const forwarded = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+    if (forwarded) return forwarded;
+  }
+  return req.socket.remoteAddress || 'unknown';
+}
+
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'SAMEORIGIN',
   'Referrer-Policy': 'strict-origin-when-cross-origin'
 };
 
-module.exports = { HttpError, sendJson, readJsonBody, parseCookies, isHttps, SECURITY_HEADERS };
+module.exports = { HttpError, sendJson, readJsonBody, parseCookies, isHttps, clientIp, SECURITY_HEADERS };
