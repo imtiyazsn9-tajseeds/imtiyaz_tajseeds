@@ -26,86 +26,105 @@ A complete, production-ready, multi-page corporate website built for **Taj Seeds
 
 ```
 imtiyaz_tajseeds/
-├── server/                  # Node.js backend (no dependencies)
-│   ├── index.js             # Starts the HTTP server
-│   ├── config.js            # Settings from environment variables
+├── worker/                  # Cloudflare Worker backend (no runtime dependencies)
+│   ├── index.js             # Entry point: /api, /data and /uploads, everything else is static
 │   ├── router.js            # API routes (protected by login unless marked public)
-│   ├── routes/              # session.js (login), images.js (photos), content.js (save data)
-│   ├── auth.js              # Sessions, password check, login rate limit
-│   ├── static.js            # Serves /public safely (no path traversal, hides dotfiles)
-│   ├── storage.js           # Writes the JSON data files and photos
-│   ├── images.js            # Checks uploaded photos (type, size, file signature)
+│   ├── routes/              # session.js (login), content.js (save), images.js, contact.js, backups.js
+│   ├── auth.js              # Signed-cookie sessions and password check
+│   ├── ratelimit.js         # Login / contact-form attempt limits (stored in D1)
+│   ├── documents.js         # Products / gallery / settings: read, save, backups, restore
+│   ├── enquiries.js         # Contact-form inbox
+│   ├── images.js            # Checks and stores uploaded photos
 │   ├── validators.js        # Checks products / gallery / settings before saving
-│   └── http.js              # Shared request/response helpers
+│   └── static-images.js     # Generated list of the photos shipped in public/assets
 │
-├── public/                  # Everything the browser can open
+├── migrations/              # D1 database tables
+├── public/                  # Static site, served free and unlimited by Cloudflare
 │   ├── *.html               # index, products, gallery, quality, about, contact, admin
-│   ├── data/                # products.json, gallery.json, site-config.json (single source of truth)
-│   ├── css/                 # style.css, pages.css, admin.css
-│   ├── js/
-│   │   ├── data.js          # Loads the JSON files
-│   │   ├── layout.js        # Shared top bar, header, mobile menu, footer, WhatsApp button
-│   │   ├── main.js, products.js, gallery.js, home-products.js, contact.js, site-config.js
-│   │   └── admin/           # Admin panel modules (api, auth, products, gallery, settings, ...)
-│   └── assets/              # logo, favicon, products/, gallery/, ...
+│   ├── data/                # Starting copy of products / gallery / settings (used until the first admin save)
+│   ├── css/, js/, assets/   # styles, scripts (js/admin/ = admin panel modules), logo and photos
+│   ├── _headers, _redirects # security headers and "/" -> index.html
 │
-├── storage/                 # (created at runtime, git-ignored) enquiries.json and backups/
-├── tests/server.test.js     # Automated checks for login, uploads, saving, file serving
-├── scripts/                 # One-off import helpers
-├── docs/                    # Editing guide
-├── package.json
-└── .env.example
+├── tests/worker.test.js     # Runs the real Worker locally and checks login, uploads, saving, backups...
+├── scripts/                 # build-image-manifest.js and one-off import helpers
+├── wrangler.jsonc           # Cloudflare configuration
+└── .dev.vars.example        # Local login settings
 ```
 
 ---
 
-## 🚀 Running the Website
+## 🚀 Running Locally
 
-Requires Node.js 18 or newer. There is nothing to install.
+Requires Node.js 20 or newer.
 
 ```bash
-npm start          # http://localhost:8080
-npm run dev        # same, restarts when server files change
-npm test           # runs the automated server tests
+npm install        # once
+cp .dev.vars.example .dev.vars    # once, then set ADMIN_PASSWORD
+npm start          # http://localhost:8080 (local database, nothing touches the live site)
+npm test           # starts the Worker locally and runs the automated checks
 ```
 
-Settings come from environment variables (see `.env.example`):
+> Open the site through the server (not by double-clicking the HTML files).
 
-| Variable | Default | Purpose |
+---
+
+## ☁️ Deploying to Cloudflare (free plan)
+
+Everything runs on Cloudflare's free plan: static files and photos in the Worker's assets, content / enquiries /
+backups / uploaded photos in one **D1** database. No credit card feature (R2, KV, paid plan) is used.
+
+One-time setup:
+
+```bash
+npx wrangler login
+npx wrangler d1 create tajseeds        # copy the printed database_id into wrangler.jsonc
+npm run db:remote                      # creates the tables
+npx wrangler secret put ADMIN_PASSWORD # your admin password
+npx wrangler secret put SESSION_SECRET # any long random text
+```
+
+Then deploy (and again after every code change):
+
+```bash
+npm run deploy
+```
+
+Optional secrets: `ADMIN_ID` (default `tajseeds`), `NOTIFY_WEBHOOK_URL` (every enquiry is also POSTed there as JSON, e.g. Formspree/Zapier).
+If `ADMIN_PASSWORD` is not set, admin login is disabled on purpose.
+
+### Staying inside the free limits
+
+| Limit (free plan) | What uses it | Typical use |
 |---|---|---|
-| `PORT` | `8080` | Port to listen on |
-| `ADMIN_ID` | `tajseeds` | Admin login ID (spaces/case are ignored, so "Taj Seeds" works) |
-| `ADMIN_PASSWORD` | `0099` | Admin password. **Set your own before going online.** |
-| `TRUST_PROXY` | `0` | Set to `1` behind nginx/Cloudflare |
-| `NOTIFY_WEBHOOK_URL` | (empty) | Optional. Every new enquiry is also POSTed here as JSON (Formspree, Zapier, Make, ...) |
-| `PRIVATE_DIR` | `./storage` | Enquiries and backups. Never served to browsers. |
+| 100,000 Worker requests / day | Only `/api/*`, `/data/*` and `/uploads/*`. Pages, CSS, JS and shipped photos are free and unlimited. Data is cached in the browser for 30 s. | A visitor's page view is about 2 to 3 requests, so roughly 30,000 page views a day |
+| 5 million D1 reads / 100,000 writes per day | A page view reads 2 to 3 rows; a save writes about 10 rows | Far below |
+| 5 GB D1 storage | Photos are shrunk to under 1 MB (usually 20 to 200 KB) and capped at 400; enquiries capped at 2,000; 40 backups per section | Well under 100 MB |
+| 10 ms CPU per request | Small JSON work only; uploads over 1 MB are refused | Fine |
 
-Example: `ADMIN_PASSWORD=my-secret npm start`
-
-> The pages load their data with `fetch`, so open the site through the server
-> (not by double-clicking the HTML files).
+When a free limit is reached Cloudflare blocks the request until midnight UTC. It never charges the free plan.
+Pages and photos that ship with the site keep working even then.
 
 ---
 
 ## 🔐 Admin Panel
 
-Open `/admin.html` and sign in. Login is checked by the server; the browser only
-receives a secure session cookie. After 5 wrong passwords a visitor is locked out for 15 minutes.
+Open `/admin.html` and sign in. Login is checked by the Worker; the browser only
+receives a signed session cookie (valid 8 hours). After 5 wrong passwords a visitor is locked out for 15 minutes.
 
 - **Home Page Seeds / All Seeds Catalog:** add, edit, delete products, upload photos, choose which seeds show on the home page.
 - **Gallery Photos:** add, edit, delete gallery photos and sections.
 - **Contact & Info:** phone numbers, email, address, tagline, WhatsApp number. These are used for every call/WhatsApp link on the site.
 - **Enquiries:** messages sent through the website's contact form (with Call / WhatsApp buttons and a New/Handled mark).
 - **Backups:** every save keeps the previous version; restore any of them with one click.
-- Photos are shrunk to 1200px WebP before upload; unused photos can be deleted from the photo picker.
+- Photos are shrunk to 1200px WebP before upload (max 1 MB). Photos uploaded from the panel can be deleted when unused; the photos that ship in `public/assets` can only be removed from the code.
 - Changes are applied on the page first. Click **Save Changes** to publish them to the website.
 
 ---
 
 ## 🛠️ Editing Content & Code
 
-- **Products, gallery, contact details:** use the admin panel. It writes `public/data/*.json`, which every page reads.
+- **Products, gallery, contact details:** use the admin panel. Saves go to the database and every page reads them. `public/data/*.json` is only the starting copy; once the admin has saved, the database wins.
 - **Header / footer / mobile menu:** edit `public/js/layout.js` once; all pages update.
 - **Logo:** replace `public/assets/logo.png` (transparent PNG) and `public/assets/favicon.png`.
 - **Hero image:** replace `public/assets/hero-field.jpg`.
-- **Contact form endpoint:** in `public/contact.html`, change the form `action` to your Formspree (or similar) URL.
+- **New photos added to `public/assets/products` or `gallery`:** run `npm run build` (done automatically by `npm run deploy`) so the admin photo picker lists them.

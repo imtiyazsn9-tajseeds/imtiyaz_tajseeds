@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "Taj Seeds Agri Sciences website with a no-code admin panel",
   "private": true,
-  "main": "server/index.js",
+  "main": "worker/index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "node --watch server/index.js",
-    "test": "node --test"
+    "start": "wrangler d1 migrations apply tajseeds --local && wrangler dev --port 8080 --ip 127.0.0.1",
+    "build": "node scripts/build-image-manifest.js",
+    "test": "node --test",
+    "db:remote": "wrangler d1 migrations apply tajseeds --remote",
+    "deploy": "npm run build && wrangler deploy"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "wrangler": "^4.156.0"
   }
 }

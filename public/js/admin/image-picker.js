@@ -27,7 +27,7 @@ export function createImagePicker({ scope, folder, ids }) {
         <button type="button" class="existing-thumb-btn ${img.path === pathInput.value ? 'is-selected' : ''}" data-index="${i}" title="${escapeHtml(img.filename)}">
           <img src="${escapeHtml(imgSrc(img.path))}" alt="${escapeHtml(img.filename)}" loading="lazy">
         </button>
-        ${isInUse(img) ? '' : `<button type="button" class="thumb-delete" data-delete="${i}" title="Ye photo kahin use nahi ho rahi - delete karein" aria-label="Delete unused photo">&times;</button>`}
+        ${(img.deletable && !isInUse(img)) ? `<button type="button" class="thumb-delete" data-delete="${i}" title="Ye photo kahin use nahi ho rahi - delete karein" aria-label="Delete unused photo">&times;</button>` : ''}
       </div>`).join('');
   }
 

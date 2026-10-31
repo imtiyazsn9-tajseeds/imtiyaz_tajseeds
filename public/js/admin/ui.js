@@ -34,6 +34,7 @@ export function setStatus(el, text, state) {
 }
 
 const MAX_SIDE = 1200;
+const MAX_UPLOAD_BYTES = 900 * 1024;
 
 /**
  * Shrinks a photo in the browser before upload: phone photos are often 4000px / 5 MB, far larger
@@ -45,16 +46,21 @@ export async function prepareImage(file) {
   }
 
   const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement('canvas');
-  canvas.width = Math.round(bitmap.width * scale);
-  canvas.height = Math.round(bitmap.height * scale);
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#FFFFFF'; // photos with transparency get a white background, like the product cards
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  // The server accepts photos up to 1 MB; try smaller sizes if a busy photo is still too big
+  let blob = null;
+  for (const [side, quality] of [[MAX_SIDE, 0.82], [MAX_SIDE, 0.7], [900, 0.7], [700, 0.6]]) {
+    const scale = Math.min(1, side / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFFFFF'; // photos with transparency get a white background, like the product cards
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
 
-  const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', 0.82));
+    blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
+    if (!blob || blob.type !== 'image/webp' || blob.size <= MAX_UPLOAD_BYTES) break;
+  }
   if (!blob || blob.type !== 'image/webp') {
     return { filename: file.name, data: await readFileAsDataUrl(file) }; // browser cannot encode WebP
   }

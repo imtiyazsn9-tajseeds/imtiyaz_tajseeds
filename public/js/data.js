@@ -9,7 +9,7 @@ const TajData = (() => {
 
   function load(name) {
     if (!cache[name]) {
-      cache[name] = fetch(`data/${name}.json`, { cache: 'no-cache' })
+      cache[name] = fetch(`data/${name}.json`)
         .then(res => {
           if (!res.ok) throw new Error(`Could not load ${name} (${res.status})`);
           return res.json();

@@ -1,0 +1,11 @@
+# Local development: copy to .dev.vars (git-ignored); `npm start` reads it.
+# For the live site set these as Cloudflare secrets instead (see README):
+#   npx wrangler secret put ADMIN_PASSWORD
+#   npx wrangler secret put SESSION_SECRET
+ADMIN_ID=tajseeds
+ADMIN_PASSWORD=change-me
+SESSION_SECRET=any-long-random-text
+
+# Optional: also forward every contact-form enquiry to this URL (JSON POST).
+# Example with Formspree: https://formspree.io/f/<your-form-id>
+# NOTIFY_WEBHOOK_URL=

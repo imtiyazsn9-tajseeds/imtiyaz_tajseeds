@@ -1,5 +1,3 @@
-'use strict';
-
 /** Input validation. Each validator returns an error message, or null when the input is valid. */
 
 const isObject = v => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -75,4 +73,4 @@ function parseEnquiry(body) {
   };
 }
 
-module.exports = { validateProducts, validateGallery, validateConfig, parseEnquiry };
+export { validateProducts, validateGallery, validateConfig, parseEnquiry };

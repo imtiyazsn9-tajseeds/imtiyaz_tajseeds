@@ -5,3 +5,5 @@ Thumbs.db
 *.tmp
 .env
 storage/
+.dev.vars
+.wrangler/
