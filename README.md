@@ -96,7 +96,7 @@ If `ADMIN_PASSWORD` is not set, admin login is disabled on purpose.
 
 | Limit (free plan) | What uses it | Typical use |
 |---|---|---|
-| 100,000 Worker requests / day | Only `/api/*`, `/data/*` and `/uploads/*`. Pages, CSS, JS and shipped photos are free and unlimited. Data is cached in the browser for 30 s. | A visitor's page view is about 2 to 3 requests, so roughly 30,000 page views a day |
+| 100,000 Worker requests / day | Only `/api/*`, `/data/*` and `/uploads/*`. Pages, CSS, JS and shipped photos are free and unlimited. | A visitor's page view is about 2 to 3 requests, so roughly 30,000 page views a day |
 | 5 million D1 reads / 100,000 writes per day | A page view reads 2 to 3 rows; a save writes about 10 rows | Far below |
 | 5 GB D1 storage | Photos are shrunk to under 1 MB (usually 20 to 200 KB) and capped at 400; enquiries capped at 2,000; 40 backups per section | Well under 100 MB |
 | 10 ms CPU per request | Small JSON work only; uploads over 1 MB are refused | Fine |

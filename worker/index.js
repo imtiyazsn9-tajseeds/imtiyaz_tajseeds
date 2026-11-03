@@ -19,7 +19,8 @@ const withSecurityHeaders = res => {
 async function serveDocument(request, env, name) {
   const doc = await readDocument(env, request, name);
   const etag = `"${doc.version}"`;
-  const headers = { ETag: etag, 'Cache-Control': 'public, max-age=30' };
+  // Always revalidate (a 304 is cheap), so admin changes show up on the next page load
+  const headers = { ETag: etag, 'Cache-Control': 'no-cache' };
   if (request.headers.get('if-none-match') === etag) return new Response(null, { status: 304, headers });
   return new Response(request.method === 'HEAD' ? null : doc.json, {
     headers: { 'Content-Type': 'application/json; charset=UTF-8', ...headers }

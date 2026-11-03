@@ -67,6 +67,11 @@ test('site files and shipped data are served', async () => {
   assert.strictEqual(res.status, 200);
   assert.ok(Array.isArray(await res.json()), 'falls back to the file that shipped with the site');
   assert.strictEqual(res.headers.get('x-content-type-options'), 'nosniff');
+
+  // Browsers revalidate, so saved changes show up immediately, and unchanged data costs only a 304
+  assert.strictEqual(res.headers.get('cache-control'), 'no-cache');
+  const again = await fetch(`${base}/data/products.json`, { headers: { 'If-None-Match': res.headers.get('etag') } });
+  assert.strictEqual(again.status, 304);
 });
 
 test('mutating endpoints require login', async () => {
